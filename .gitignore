@@ -15,6 +15,15 @@ dist/
 # Saves e opções pessoais (o jogo cria de novo ao jogar)
 saves/
 
+# Só neste computador: anotações do projeto, planos e prompts, prints de referência
+CLAUDE.md
+docs/
+ferramentas/referencias_ui/
+
+# Configurações locais do Claude Code e do editor
+.claude/
+.vscode/
+
 # Prévias geradas pelas ferramentas (refeitas a qualquer momento)
 ferramentas/previas_ui/
 ferramentas/sprites_macabros/previas/
