@@ -1,0 +1,33 @@
+# Ambientes virtuais
+.venv/
+.venv*/
+venv/
+
+# Caches do Python e do pytest
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# O que o construtor do instalador gera (python ferramentas/instalador/construir.py)
+build/
+dist/
+
+# Saves e opções pessoais (o jogo cria de novo ao jogar)
+saves/
+
+# Prévias geradas pelas ferramentas (refeitas a qualquer momento)
+ferramentas/previas_ui/
+ferramentas/sprites_macabros/previas/
+
+# Só neste computador: anotações do projeto, planos e prompts, prints de referência
+CLAUDE.md
+docs/
+ferramentas/referencias_ui/
+
+# Configurações locais do Claude Code e do editor
+.claude/
+.vscode/
+
+# Lixo do Windows
+Thumbs.db
+desktop.ini

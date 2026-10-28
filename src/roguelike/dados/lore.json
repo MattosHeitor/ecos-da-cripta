@@ -1,0 +1,23 @@
+{
+  "_comentario": "Lore dos chefes no bestiário do Estudioso: aparece depois de vencer o chefe pela primeira vez (botão 'Ler a história'). Uma lista = a história em partes: cada parte pede as vitórias de regras.json bestiario 'partes_da_lore' (ex.: [1, 3]).",
+
+  "medico_da_peste_corrompido": "Desceu aos esgotos para curar a cidade da peste e encontrou a cura: um rato que nunca adoecia. Agora trata os doentes do jeito que os ratos querem: vivos o bastante para servir.",
+  "flautista_caido": "Livrou três cidades dos ratos com uma canção. A quarta não pagou. Ele tocou de novo, e dessa vez foram os ratos que o levaram para os esgotos. Hoje é ele quem dança.",
+  "rainha_dos_ratos": ["Ninguém a coroou. Quando o Rei subiu ao trono, os ratos mais famintos correram para alcançá-lo pelas vigas do teto, se embolaram pelas caudas e nunca mais se soltaram. O nó cresceu, apodreceu e aprendeu a girar. Hoje a roda tem fome por todos eles.",
+                       "Foi o Rei quem pôs a coroa no nó, no dia em que entendeu que nunca conseguiria soltá-los. Chamou-a de Rainha para que os ratos achassem que tinha sido escolha. Os que giram hoje não são os primeiros: quando um cai, o nó puxa outro pela cauda. Por isso os ratos do Reino dormem com o rabo enrolado no corpo."],
+  "rei_dos_ratos": ["Era um rato comum, gordo de restos, quando um nobre bêbado caiu no esgoto e se afogou. O rato roeu a bolsa, depois os dedos, e por fim saiu com a coroa na cabeça. Os outros ratos se curvaram. Desde então, tudo o que cai no esgoto paga imposto.",
+                    "A coroa também não era do nobre: ele a tirou do tesouro da Catedral na noite em que o sol se apagou, e fugiu pelos esgotos. Ela pesa como pesava na cabeça dele: quem a usa nunca se sente rico o bastante. Por isso o Imposto, por isso o trono de tudo o que cai. E quando o derrubam, a primeira coisa que o Rei procura não é a Rainha. É a coroa."],
+  "aranha_mae": "Antes da Floresta morrer, ela era só uma tecelã de seda que os aldeões pagavam em leite. Quando as árvores secaram, o leite parou de vir. Ela não parou de ter fome.",
+  "golem_carregando": "Os anões o ergueram para carregar minério, não para pensar. Mas carregou peso demais por tempo demais, e um dia a pedra decidiu que nunca mais seria carregada por ninguém.",
+  "dragao_osseo": "O último dragão do reino morreu defendendo a Catedral. Os bispos agradeceram enterrando seus ossos no altar. Os ossos não aceitaram o agradecimento.",
+  "rei_sombrio": "Ninguém lembra o nome do reino que ele governava. Ele lembra. É a única coisa que lembra, e repete para as sombras toda noite.",
+  "mae_raiz": "O Bosque Carmesim era vermelho de flores. Ela bebeu tanto sangue dos caçadores que as flores mudaram de cor por respeito. Ou por medo.",
+  "barqueiro_sem_rosto": "Cobra uma moeda de cada morto que atravessa o Pântano. Quando os vivos pararam de pagar, ele começou a cobrar adiantado.",
+  "inquisidor_penitente": "Queimou hereges até não sobrarem hereges. Então olhou para a própria sombra e achou nela o último pecado do mundo. Ainda está tentando queimá-la.",
+  "forjador_antigo": "O maior ferreiro dos anões jurou terminar uma última obra antes de morrer. Morreu. Não terminou. A forja dele nunca apagou, e ele também não.",
+  "rainha_de_gelo_eterno": "Ela pediu aos deuses que o inverno em que o filho morreu nunca acabasse, para não ter que viver a primavera sem ele. Os deuses atenderam. Os deuses sempre atendem.",
+  "bispo_eclipsado": "Quando o sol se apagou, o povo foi à Catedral pedir luz. O Bispo rezou a noite inteira e, ao amanhecer que não veio, entendeu: a luz não ia voltar. Então decidiu ser ele o sol. Os vitrais choraram vidro, e o dragão que dormia no seu coração acordou.",
+  "dragao_do_eclipse": "O que dormia no coração do Bispo não era fé: era fome. Quando o último vitral se partiu, ela abriu as asas sob o sol negro. Não tem nome, não tem rebanho, não reza. Só quer que a noite nunca mais acabe.",
+  "mercador_mascarado": "Vende de tudo nas estradas do meio do caminho: mapas, venenos, segundos de vida. Dizem que a máscara não esconde um rosto, e sim o preço que ele já pagou.",
+  "primeiro_heroi": "Antes de todos os grupos, houve um grupo. Antes de todas as fogueiras, uma fogueira. Ele foi o único que voltou, e esperou séculos atrás do altar por alguém que voltasse também, só para saber se valeu a pena."
+}

@@ -1,0 +1,21 @@
+{
+  "_comentario": "Afixos aleatórios das peças raras ou melhores (quantos: regras.json raridades.afixos). nome = o que se junta ao nome da peça. em = tipos de peça onde pode cair (arma, armadura, acessorio). valores = [mínimo, máximo] sorteados; negativos = o preço do afixo (troca).",
+  "da_furia":        {"nome": "da Fúria",        "em": ["arma"], "valores": {"dano_causado": [0.05, 0.12]}},
+  "do_corte":        {"nome": "do Corte",        "em": ["arma"], "valores": {"chance_critico": [0.02, 0.06]}},
+  "do_carrasco":     {"nome": "do Carrasco",     "em": ["arma"], "valores": {"dano_critico": [0.1, 0.25]}},
+  "do_peso":         {"nome": "do Peso",         "em": ["arma"], "valores": {"dano_causado_fisico": [0.08, 0.16], "iniciativa": [-1, -1]}},
+  "do_vampiro":      {"nome": "do Vampiro",      "em": ["arma", "acessorio"], "valores": {"roubo_vida": [0.03, 0.06]}},
+  "arcano":          {"nome": "dos Arcanos",          "em": ["arma", "acessorio"], "valores": {"dano_magico": [0.06, 0.14]}},
+  "da_mira":         {"nome": "da Mira",         "em": ["arma", "armadura"], "valores": {"precisao": [0.04, 0.1]}},
+  "da_muralha":      {"nome": "da Muralha",      "em": ["armadura"], "valores": {"defesa": [1, 2], "iniciativa": [-1, -1]}},
+  "do_vigor":        {"nome": "do Vigor",        "em": ["armadura", "acessorio"], "valores": {"vida_maxima": [3, 8]}},
+  "da_neblina":      {"nome": "da Neblina",      "em": ["armadura"], "valores": {"chance_esquiva": [0.02, 0.05]}},
+  "do_vento":        {"nome": "do Vento",        "em": ["armadura"], "valores": {"iniciativa": [1, 2]}},
+  "da_sombra":       {"nome": "da Sombra",       "em": ["armadura", "acessorio"], "valores": {"furtividade": [0.05, 0.12]}},
+  "da_geada":        {"nome": "da Geada",        "em": ["armadura", "acessorio"], "valores": {"resistencia_magica": [0.04, 0.1]}},
+  "da_sorte":        {"nome": "da Sorte",        "em": ["acessorio", "arma"], "valores": {"sorte": [1, 3]}},
+  "do_sabio":        {"nome": "do Sábio",        "em": ["acessorio", "armadura"], "valores": {"inteligencia": [1, 3]}},
+  "do_monge":        {"nome": "do Monge",        "em": ["acessorio"], "valores": {"energia_maxima": [1, 1]}},
+  "do_berserker":    {"nome": "do Berserker",    "em": ["arma", "armadura"], "valores": {"dano_causado": [0.1, 0.18], "dano_recebido": [0.05, 0.1]}},
+  "do_eremita":      {"nome": "do Eremita",      "em": ["armadura", "acessorio"], "valores": {"defesa": [2, 3], "dano_causado": [-0.08, -0.04]}}
+}

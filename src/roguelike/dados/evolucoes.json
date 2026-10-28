@@ -1,0 +1,44 @@
+{
+  "_comentario": "Evolução de golpes: golpe -> 'para' (versão aprimorada em habilidades.json). O golpe evolui sozinho quando o 'requisito' é cumprido (todos os itens): nivel (do herói), especializacao (ganha com o treinador), subclasse ou marco da run (ex.: 'chefe:aranha_mae'). O nível do golpe é mantido.",
+
+  "_guerreiro": "---- Guerreiro ----",
+  "golpe":              {"para": "corte_veterano",       "requisito": {"nivel": 8}},
+  "golpe_de_escudo":    {"para": "muralha_de_ferro",     "requisito": {"especializacao": "guardiao_juramentado"}},
+  "redemoinho":         {"para": "tormenta_de_aco",      "requisito": {"especializacao": "carniceiro"}},
+
+  "_ladino": "---- Ladino ----",
+  "punhalada":          {"para": "punhalada_certeira",   "requisito": {"nivel": 8}},
+  "corte_hemorragico":  {"para": "ferida_aberta",        "requisito": {"especializacao": "ceifador_silencioso"}},
+
+  "_mago": "---- Mago ----",
+  "cajado":             {"para": "cajado_runico",        "requisito": {"nivel": 8}},
+  "bola_de_fogo":       {"para": "inferno",              "requisito": {"especializacao": "arauto_das_cinzas"}},
+  "lanca_de_gelo":      {"para": "lanca_do_inverno",     "requisito": {"especializacao": "coracao_do_inverno"}},
+  "corrente_de_raios":  {"para": "tempestade_de_raios",  "requisito": {"especializacao": "artifice_runico"}},
+
+  "_sacerdote": "---- Sacerdote ----",
+  "martelo_sagrado":    {"para": "martelo_da_aurora",    "requisito": {"nivel": 8}},
+  "cura_sagrada":       {"para": "milagre",              "requisito": {"marco": "chefe:aranha_mae"}},
+
+  "_barbaro": "---- Bárbaro ----",
+  "golpes_rapidos":     {"para": "tempestade_de_golpes", "requisito": {"nivel": 8}},
+  "giro_brutal":        {"para": "ciclone_sangrento",    "requisito": {"especializacao": "besta_ancestral"}},
+
+  "_patrulheira": "---- Patrulheira ----",
+  "flecha":             {"para": "flecha_perfurante",    "requisito": {"nivel": 8}},
+  "chuva_de_flechas":   {"para": "ceu_negro",            "requisito": {"marco": "chefe:aranha_mae"}},
+
+  "_bardo": "---- Bardo ----",
+  "acorde_cortante":    {"para": "acorde_estilhacante",  "requisito": {"nivel": 8}},
+  "cancao_de_coragem":  {"para": "hino_heroico",         "requisito": {"marco": "chefe:aranha_mae"}},
+
+  "_bobo": "---- Bobo da Corte ----",
+  "piada_cortante":     {"para": "piada_mortal",         "requisito": {"nivel": 8}},
+  "malabares":          {"para": "malabares_flamejantes", "requisito": {"marco": "chefe:aranha_mae"}},
+  "_medico_da_peste": "---- Médico da Peste ----",
+  "lanceta":            {"para": "lanceta_de_prata",     "requisito": {"nivel": 8}},
+  "tonico_amargo":      {"para": "elixir_amargo",        "requisito": {"subclasse": "doutor_da_peste", "nivel": 6}},
+  "_senhor_dos_ratos": "---- Senhor dos Ratos ----",
+  "toque_pestilento":   {"para": "toque_da_morte_negra", "requisito": {"nivel": 8}},
+  "chamar_ratos":       {"para": "chamar_a_ninhada",     "requisito": {"subclasse": "rei_dos_bandos", "nivel": 6}}
+}

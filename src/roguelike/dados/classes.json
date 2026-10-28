@@ -1,0 +1,781 @@
+{
+  "_comentario": "Classes de herói. habilidades = golpes iniciais da classe. subclasses: escolhidas na Capitã; prestigio = nível de prestígio da classe que libera; golpes = [assinatura, 2º, 3º] (chegam nos níveis de regras.subclasse.niveis_golpes); sprite = roupa própria. especializacoes: aprendidas com o treinador durante a run (regiao = onde ele aparece; a Catedral ensina todas); modificadores valem para o herói enquanto tiver a especialidade.",
+
+  "guerreiro": {
+    "nome": "Guerreiro", "papel": "Tanque",
+    "descricao": "Último cavaleiro de uma ordem destruída. Aguenta golpes e protege o grupo.",
+    "atributos_principais": ["forca", "constituicao"],
+    "atributos": {"forca": 6, "destreza": 3, "constituicao": 7, "inteligencia": 2, "fe": 2, "sorte": 2, "carisma": 2},
+    "vida_base": 38, "iniciativa": [3, 8],
+    "aparencias": {"Guerreiro": "guerreiro"},
+    "habilidades": ["golpe", "golpe_de_escudo", "desafio", "redemoinho"],
+    "golpes_por_nivel": {"3": "corte_duplo", "6": "grito_de_comando"},
+    "subclasses": {
+      "cavaleiro": {"nome": "Cavaleiro", "prestigio": 0,
+        "descricao": "Escudo de aço e voto inquebrável: protege os aliados.",
+        "golpes": ["baluarte", "lanca_da_justica", "juramento"],
+        "passivas": [{"tipo": "bonus", "nome": "Muralha", "descricao": "+8% de bloqueio e bloqueios 10% mais fortes.",
+                      "modificadores": {"chance_bloqueio": 0.08, "reducao_bloqueio": 0.1}}],
+        "especializacoes": {
+          "guardiao_juramentado": {"sprite": "guerreiro_guardiao", "nome": "Guardião Juramentado", "regiao": "floresta",
+            "descricao": "Jurou cair antes de qualquer aliado. O escudo vira muralha.",
+            "modificadores": {"chance_bloqueio": 0.05, "vida_maxima": 4}, "golpes": ["egide_sagrada"]}}},
+      "berserker": {"sprite": "guerreiro_berserker", "nome": "Berserker", "prestigio": 3,
+        "descricao": "Troca a defesa por fúria. Mais perigoso quanto mais ferido.",
+        "golpes": ["frenesi", "sede_de_sangue", "furia_cega"],
+        "passivas": [{"tipo": "vida_baixa", "nome": "Sangue Fervente", "descricao": "Abaixo de 50% de vida causa +30% de dano.",
+                      "limiar": 0.5, "modificadores": {"dano_causado": 0.3}}],
+        "especializacoes": {
+          "carniceiro": {"sprite": "guerreiro_carniceiro", "nome": "Carniceiro", "regiao": "minas",
+            "descricao": "Não luta mais: abate. Cada corte devolve um pouco de vida.",
+            "modificadores": {"roubo_vida": 0.05, "dano_causado": 0.05}, "golpes": ["matanca"]}}},
+      "gladiador": {"sprite": "guerreiro_gladiador", "nome": "Gladiador", "prestigio": 6,
+        "descricao": "Lutou na arena por anos. Atrai os golpes e termina a luta com estilo.",
+        "golpes": ["rugido_da_arena", "investida_brutal", "golpe_de_misericordia"],
+        "passivas": [{"tipo": "bonus", "nome": "Sede de Aplausos", "descricao": "+5% de crítico e +20% de dano crítico.",
+                      "modificadores": {"chance_critico": 0.05, "dano_critico": 0.2}}],
+        "especializacoes": {
+          "campeao_da_arena": {"sprite": "guerreiro_campeao", "nome": "Campeão da Arena", "regiao": "catedral",
+            "descricao": "Invicto. A plateia dos mortos ainda grita o seu nome.",
+            "modificadores": {"vida_maxima": 6, "dano_causado": 0.05}, "golpes": ["grande_final"]}}}
+    }
+  },
+
+  "ladino": {
+    "nome": "Ladino", "papel": "Dano crítico",
+    "descricao": "Ataca das sombras com críticos e sangramento.",
+    "atributos_principais": ["destreza", "sorte"],
+    "atributos": {"forca": 2, "destreza": 7, "constituicao": 3, "inteligencia": 3, "fe": 1, "sorte": 6, "carisma": 2},
+    "vida_base": 30, "iniciativa": [6, 12],
+    "aparencias": {"Assassina": "assassina"},
+    "habilidades": ["punhalada", "corte_hemorragico", "bomba_de_fumaca", "golpe_baixo"],
+    "golpes_por_nivel": {"3": "faca_arremessada", "6": "sumir_na_multidao"},
+    "subclasses": {
+      "sombra": {"nome": "Sombra", "prestigio": 0,
+        "descricao": "Some no escuro e reaparece para executar.",
+        "golpes": ["passo_sombrio", "execucao", "laminas_da_noite"],
+        "passivas": [{"tipo": "bonus", "nome": "Olhos na Escuridão", "descricao": "+10% de crítico.",
+                      "modificadores": {"chance_critico": 0.1}}],
+        "especializacoes": {
+          "ceifador_silencioso": {"sprite": "assassina_ceifador", "nome": "Ceifador Silencioso", "regiao": "floresta",
+            "descricao": "Ninguém ouve. Ninguém vê. Só encontram o corpo.",
+            "modificadores": {"chance_critico": 0.05}, "golpes": ["golpe_das_sombras"]}}},
+      "duelista": {"sprite": "assassina_duelista", "nome": "Duelista", "prestigio": 3,
+        "descricao": "Esgrima elegante: revida e faz sangrar.",
+        "golpes": ["estocada_precisa", "danca_das_laminas", "postura_de_duelo"],
+        "passivas": [{"tipo": "bonus", "nome": "Precisão", "descricao": "+30% de dano crítico.",
+                      "modificadores": {"dano_critico": 0.3}}],
+        "especializacoes": {
+          "mestre_esgrimista": {"sprite": "assassina_esgrimista", "nome": "Mestre-Esgrimista", "regiao": "catedral",
+            "descricao": "A lâmina chega antes do pensamento.",
+            "modificadores": {"chance_esquiva": 0.05, "dano_critico": 0.15}, "golpes": ["estocada_relampago"]}}},
+      "envenenador": {"sprite": "assassina_envenenador", "nome": "Envenenador", "prestigio": 6,
+        "descricao": "Cada lâmina leva uma gota de algo pior que aço.",
+        "golpes": ["lamina_envenenada", "nuvem_toxica", "dose_letal"],
+        "passivas": [{"tipo": "bonus", "nome": "Mãos Sujas", "descricao": "+5% de crítico e venenos 15% mais fortes.",
+                      "modificadores": {"chance_critico": 0.05, "potencia_suporte": 0.15}}],
+        "especializacoes": {
+          "praga_viva": {"sprite": "assassina_praga", "nome": "Praga Viva", "regiao": "minas",
+            "descricao": "O próprio sangue virou veneno.",
+            "modificadores": {"chance_esquiva": 0.05}, "golpes": ["epidemia"]}}}
+    }
+  },
+
+  "mago": {
+    "nome": "Mago", "papel": "Magia",
+    "descricao": "Domina fogo, gelo, raio ou a morte. Magias caras e devastadoras.",
+    "atributos_principais": ["inteligencia", "sorte"],
+    "atributos": {"forca": 1, "destreza": 3, "constituicao": 3, "inteligencia": 8, "fe": 3, "sorte": 5, "carisma": 1},
+    "vida_base": 26, "iniciativa": [4, 9],
+    "aparencias": {"Fogo": "mago_Fogo", "Gelo": "mago_Gelo", "Raio": "mago_Raio"},
+    "aparencia_padrao": "Fogo",
+    "habilidades": ["cajado", "misseis_arcanos", "barreira_arcana"],
+    "golpes_por_nivel": {"3": "raio_arcano", "6": "explosao_arcana"},
+    "subclasses": {
+      "piromante": {"nome": "Piromante", "prestigio": 0, "sprite": "mago_Fogo",
+        "descricao": "Fogo que se espalha e não apaga.",
+        "golpes": ["bola_de_fogo", "chama_viva", "escudo_de_brasas"],
+        "passivas": [{"tipo": "bonus", "nome": "Calor", "descricao": "+5% de dano.", "modificadores": {"dano_causado": 0.05}}],
+        "especializacoes": {
+          "arauto_das_cinzas": {"sprite": "mago_Cinzas", "nome": "Arauto das Cinzas", "regiao": "minas",
+            "descricao": "Onde passa, só sobra cinza. A Bola de Fogo vira Inferno.",
+            "modificadores": {"dano_causado": 0.08}, "golpes": ["meteoro"]}}},
+      "criomante": {"nome": "Criomante", "prestigio": 3, "sprite": "mago_Gelo",
+        "descricao": "Gelo que congela e protege.",
+        "golpes": ["lanca_de_gelo", "nevasca", "armadura_de_gelo"],
+        "passivas": [{"tipo": "bonus", "nome": "Pele Fria", "descricao": "+5% de bloqueio.", "modificadores": {"chance_bloqueio": 0.05}}],
+        "especializacoes": {
+          "coracao_do_inverno": {"sprite": "mago_Inverno", "nome": "Coração do Inverno", "regiao": "catedral",
+            "descricao": "O inverno mora dentro dele. A Lança de Gelo vira Lança do Inverno.",
+            "modificadores": {"chance_bloqueio": 0.05, "defesa": 1}, "golpes": ["zero_absoluto"]}}},
+      "eletromante": {"nome": "Eletromante", "prestigio": 3, "sprite": "mago_Raio",
+        "descricao": "Raios que saltam de inimigo em inimigo.",
+        "golpes": ["corrente_de_raios", "descarga", "sobrecarga"],
+        "passivas": [{"tipo": "bonus", "nome": "Estática", "descricao": "+15% de chance de ganhar energia.",
+                      "modificadores": {"ganho_energia": 0.15}}],
+        "especializacoes": {
+          "artifice_runico": {"sprite": "mago_Runas", "nome": "Artífice Rúnico", "regiao": "minas",
+            "descricao": "Prende raios em runas e torretas. A Corrente vira Tempestade.",
+            "modificadores": {"dano_causado": 0.05}, "golpes": ["torreta"]}}},
+      "necromante": {"sprite": "mago_Morte", "nome": "Necromante", "prestigio": 6,
+        "descricao": "Os mortos lutam por você.",
+        "golpes": ["erguer_esqueleto", "toque_da_morte", "exercito_dos_mortos"],
+        "passivas": [{"tipo": "bonus", "nome": "Senhor dos Mortos", "descricao": "+1 invocação ao mesmo tempo.",
+                      "modificadores": {"max_invocacoes": 1}}],
+        "especializacoes": {
+          "bruxo_de_sangue": {"sprite": "mago_Sangue", "nome": "Bruxo de Sangue", "regiao": "catedral",
+            "descricao": "Paga as magias com a própria vida e bebe a dos outros.",
+            "modificadores": {"roubo_vida": 0.08}, "golpes": ["chuva_carmesim"]}}}
+    }
+  },
+
+  "sacerdote": {
+    "nome": "Sacerdote", "papel": "Cura e suporte",
+    "descricao": "Guarda a última chama sagrada. Cura e protege.",
+    "atributos_principais": ["fe", "constituicao"],
+    "atributos": {"forca": 3, "destreza": 2, "constituicao": 6, "inteligencia": 3, "fe": 8, "sorte": 1, "carisma": 1},
+    "vida_base": 34, "iniciativa": [3, 8],
+    "aparencias": {"Paladino": "paladino"},
+    "habilidades": ["martelo_sagrado", "cura_sagrada", "bencao", "luz_purificadora"],
+    "golpes_por_nivel": {"3": "oracao_da_manha", "6": "lanca_de_luz"},
+    "subclasses": {
+      "druida": {"sprite": "paladino_druida", "nome": "Druida", "prestigio": 0,
+        "descricao": "A floresta morta ainda responde ao seu chamado.",
+        "golpes": ["chuva_viva", "pele_de_espinhos", "chamar_lobo"],
+        "passivas": [{"tipo": "bonus", "nome": "Seiva", "descricao": "+15% de cura causada.",
+                      "modificadores": {"cura_causada": 0.15}}],
+        "especializacoes": {
+          "guardiao_do_bosque": {"sprite": "paladino_bosque", "nome": "Guardião do Bosque", "regiao": "floresta",
+            "descricao": "As árvores mortas voltam a dar folhas onde ele pisa.",
+            "modificadores": {"cura_causada": 0.1}, "golpes": ["bosque_sagrado"]}}},
+      "inquisidor": {"nome": "Inquisidor", "prestigio": 3,
+        "descricao": "Queima os pecadores com fogo sagrado.",
+        "golpes": ["julgamento", "fogueira", "confissao"],
+        "passivas": [{"tipo": "bonus", "nome": "Fervor", "descricao": "+8% de crítico e +5% de dano.",
+                      "modificadores": {"chance_critico": 0.08, "dano_causado": 0.05}}],
+        "especializacoes": {
+          "martelo_da_fe": {"sprite": "paladino_martelo", "nome": "Martelo da Fé", "regiao": "catedral",
+            "descricao": "A fé não perdoa. Ela pesa.",
+            "modificadores": {"chance_critico": 0.05}, "golpes": ["sentenca"]}}},
+      "ocultista": {"sprite": "paladino_ocultista", "nome": "Ocultista", "prestigio": 6,
+        "descricao": "Troca a luz por pactos e maldições.",
+        "golpes": ["drenar_alma", "maldicao", "ritual_sombrio"],
+        "passivas": [{"tipo": "bonus", "nome": "Palavras Proibidas", "descricao": "Buffs e debuffs 20% mais fortes.",
+                      "modificadores": {"potencia_suporte": 0.2}}],
+        "especializacoes": {
+          "oraculo_profano": {"sprite": "paladino_oraculo", "nome": "Oráculo Profano", "regiao": "minas",
+            "descricao": "Vê o fim de cada inimigo antes da luta começar.",
+            "modificadores": {"potencia_suporte": 0.1}, "golpes": ["visao_profana"]}}}
+    }
+  },
+
+  "barbaro": {
+    "nome": "Bárbaro", "papel": "Golpes múltiplos",
+    "descricao": "Veio das montanhas geladas. Bate muitas vezes e não para.",
+    "atributos_principais": ["forca", "destreza"],
+    "atributos": {"forca": 6, "destreza": 6, "constituicao": 5, "inteligencia": 1, "fe": 1, "sorte": 3, "carisma": 2},
+    "vida_base": 34, "iniciativa": [5, 10],
+    "aparencias": {"Machado": "barbaro_Machado", "Espada": "barbaro_Espada", "Martelo": "barbaro_Martelo"},
+    "aparencia_padrao": "Machado",
+    "habilidades": ["golpes_rapidos", "rajada_selvagem", "giro_brutal", "folego_de_batalha"],
+    "golpes_por_nivel": {"3": "cabecada", "6": "grito_selvagem"},
+    "subclasses": {
+      "fera": {"nome": "Fera", "prestigio": 0, "sprite": "barbaro_Machado",
+        "descricao": "Morde, rasga e se cura com o sangue dos inimigos.",
+        "golpes": ["mordida_selvagem", "frenesi_animal", "uivo_aterrador"],
+        "passivas": [{"tipo": "bonus", "nome": "Instinto", "descricao": "+10% de roubo de vida.",
+                      "modificadores": {"roubo_vida": 0.1}}],
+        "especializacoes": {
+          "besta_ancestral": {"sprite": "barbaro_besta", "nome": "Besta Ancestral", "regiao": "floresta",
+            "descricao": "O espírito dos lobos antigos acordou nele. O Giro Brutal vira Ciclone Sangrento.",
+            "modificadores": {"roubo_vida": 0.05, "vida_maxima": 4}, "golpes": ["furia_primordial"]}}},
+      "elementalista": {"nome": "Elementalista", "prestigio": 3, "sprite": "barbaro_Martelo",
+        "descricao": "Socos de fogo, gelo e trovão.",
+        "golpes": ["punho_flamejante", "palma_gelida", "trovao_interior"],
+        "passivas": [{"tipo": "bonus", "nome": "Fluxo", "descricao": "+20% de chance de ganhar energia.",
+                      "modificadores": {"ganho_energia": 0.2}}],
+        "especializacoes": {
+          "tempestade_viva": {"sprite": "barbaro_tempestade", "nome": "Tempestade Viva", "regiao": "minas",
+            "descricao": "Os três elementos em cada soco.",
+            "modificadores": {"ganho_energia": 0.1}, "golpes": ["furia_dos_elementos"]}}},
+      "quebra_escudos": {"nome": "Quebra-Escudos", "prestigio": 6, "sprite": "barbaro_Espada",
+        "descricao": "Nenhuma armadura aguenta o segundo golpe.",
+        "golpes": ["esmagar_armadura", "terremoto", "pele_de_pedra"],
+        "passivas": [{"tipo": "bonus", "nome": "Peso Esmagador", "descricao": "+5% de dano e +4% de bloqueio.",
+                      "modificadores": {"dano_causado": 0.05, "chance_bloqueio": 0.04}}],
+        "especializacoes": {
+          "tita": {"sprite": "barbaro_tita", "nome": "Titã", "regiao": "catedral",
+            "descricao": "Grande como as montanhas de onde veio.",
+            "modificadores": {"vida_maxima": 8, "defesa": 1}, "golpes": ["golpe_do_tita"]}}}
+    }
+  },
+
+  "patrulheira": {
+    "nome": "Patrulheira", "papel": "Área e debuffs",
+    "descricao": "Elfa da floresta morta. Flechas para cada tipo de monstro.",
+    "atributos_principais": ["destreza", "inteligencia"],
+    "atributos": {"forca": 2, "destreza": 7, "constituicao": 3, "inteligencia": 6, "fe": 2, "sorte": 3, "carisma": 1},
+    "vida_base": 30, "iniciativa": [5, 11],
+    "aparencias": {"Arqueira": "arqueira"},
+    "habilidades": ["flecha", "chuva_de_flechas", "flecha_venenosa", "marcar_presa"],
+    "golpes_por_nivel": {"3": "tiro_duplo", "6": "flecha_incendiaria"},
+    "subclasses": {
+      "andarilha_feerica": {"nome": "Andarilha Feérica", "prestigio": 0,
+        "descricao": "Fadas curam o grupo e fazem os inimigos dormir.",
+        "golpes": ["fada_guardia", "po_de_fada", "flecha_encantada"],
+        "passivas": [{"tipo": "bonus", "nome": "Passos Leves", "descricao": "+10% de esquiva.",
+                      "modificadores": {"chance_esquiva": 0.1}}],
+        "especializacoes": {
+          "voz_do_bosque": {"sprite": "arqueira_bosque", "nome": "Voz do Bosque", "regiao": "floresta",
+            "descricao": "As fadas cantam com ela.",
+            "modificadores": {"cura_causada": 0.1}, "golpes": ["cancao_da_floresta"]}}},
+      "cacadora_das_trevas": {"sprite": "arqueira_cacadora", "nome": "Caçadora das Trevas", "prestigio": 3,
+        "descricao": "Prata, paciência e tiros que não perdoam.",
+        "golpes": ["flecha_de_prata", "saraivada", "olho_da_cacadora"],
+        "passivas": [{"tipo": "bonus", "nome": "Mira Fria", "descricao": "+10% de crítico.",
+                      "modificadores": {"chance_critico": 0.1}}],
+        "especializacoes": {
+          "cacadora_de_monstros": {"sprite": "arqueira_monstros", "nome": "Caçadora de Monstros", "regiao": "catedral",
+            "descricao": "Já caçou coisas que não deviam existir.",
+            "modificadores": {"dano_critico": 0.2}, "golpes": ["tiro_mortal"]}}},
+      "armadilheira": {"sprite": "arqueira_armadilheira", "nome": "Armadilheira", "prestigio": 6,
+        "descricao": "O chão inteiro é perigoso perto dela.",
+        "golpes": ["armadilha_de_urso", "fosso_de_estacas", "rede_de_caca"],
+        "passivas": [{"tipo": "bonus", "nome": "Paciência", "descricao": "+5% de esquiva e +5% de crítico.",
+                      "modificadores": {"chance_esquiva": 0.05, "chance_critico": 0.05}}],
+        "especializacoes": {
+          "mestra_das_armadilhas": {"sprite": "arqueira_mestra", "nome": "Mestra das Armadilhas", "regiao": "minas",
+            "descricao": "Cada passo do inimigo pode ser o último.",
+            "modificadores": {"chance_critico": 0.05}, "golpes": ["campo_minado"]}}}
+    }
+  },
+
+  "bardo": {
+    "nome": "Bardo", "papel": "Buffs e debuffs em massa",
+    "descricao": "Suas canções erguem o grupo e quebram o ânimo dos monstros.",
+    "atributos_principais": ["carisma", "inteligencia"],
+    "atributos": {"forca": 2, "destreza": 3, "constituicao": 4, "inteligencia": 4, "fe": 2, "sorte": 1, "carisma": 8},
+    "vida_base": 30, "iniciativa": [4, 9],
+    "aparencias": {"Bardo": "bardo"},
+    "habilidades": ["acorde_cortante", "cancao_de_coragem", "melodia_dissonante", "balada_restauradora"],
+    "golpes_por_nivel": {"3": "nota_aguda", "6": "aria_encantada"},
+    "subclasses": {
+      "bardo_do_valor": {"nome": "Bardo do Valor", "prestigio": 0,
+        "descricao": "Hinos de guerra que inflamam o grupo.",
+        "golpes": ["hino_de_batalha", "refrao_heroico", "marcha_triunfal"],
+        "passivas": [{"tipo": "bonus", "nome": "Voz Potente", "descricao": "Buffs 20% mais fortes.",
+                      "modificadores": {"potencia_suporte": 0.2}}],
+        "especializacoes": {
+          "hino_de_guerra": {"sprite": "bardo_hino", "nome": "Hino de Guerra", "regiao": "floresta",
+            "descricao": "A voz dele faz até os mortos marcharem.",
+            "modificadores": {"potencia_suporte": 0.1}, "golpes": ["grito_de_guerra"]}}},
+      "bardo_dos_sussurros": {"sprite": "bardo_sussurros", "nome": "Bardo dos Sussurros", "prestigio": 3,
+        "descricao": "Canções que amaldiçoam e fazem dormir.",
+        "golpes": ["sussurro_amaldicoado", "cancao_de_ninar", "lamento_funebre"],
+        "passivas": [{"tipo": "bonus", "nome": "Murmúrio", "descricao": "Debuffs 15% mais fortes e +5% de esquiva.",
+                      "modificadores": {"potencia_suporte": 0.15, "chance_esquiva": 0.05}}],
+        "especializacoes": {
+          "voz_do_abismo": {"sprite": "bardo_abismo", "nome": "Voz do Abismo", "regiao": "catedral",
+            "descricao": "Canta músicas que ninguém devia ouvir.",
+            "modificadores": {"chance_esquiva": 0.05}, "golpes": ["eco_do_abismo"]}}},
+      "menestrel_das_laminas": {"sprite": "bardo_menestrel", "nome": "Menestrel das Lâminas", "prestigio": 6,
+        "descricao": "Cada nota é um corte. Dança enquanto luta.",
+        "golpes": ["lamina_ritmada", "danca_das_facas", "passo_de_danca"],
+        "passivas": [{"tipo": "bonus", "nome": "Ritmo", "descricao": "+5% de crítico e +5% de esquiva.",
+                      "modificadores": {"chance_critico": 0.05, "chance_esquiva": 0.05}}],
+        "especializacoes": {
+          "dancarino_de_laminas": {"sprite": "bardo_dancarino", "nome": "Dançarino de Lâminas", "regiao": "minas",
+            "descricao": "A dança acabou. Os inimigos também.",
+            "modificadores": {"chance_esquiva": 0.05, "dano_causado": 0.05}, "golpes": ["valsa_mortal"]}}}
+    }
+  },
+
+  "bobo": {
+    "nome": "Bobo da Corte", "nome_curto": "Bobo", "papel": "Caos e truques",
+    "descricao": "O rei morreu, a corte apodreceu, mas o bobo continua rindo. Sorte, truques e lâminas.",
+    "atributos_principais": ["carisma", "sorte"],
+    "atributos": {"forca": 2, "destreza": 5, "constituicao": 4, "inteligencia": 2, "fe": 1, "sorte": 5, "carisma": 5},
+    "vida_base": 30, "iniciativa": [5, 11],
+    "aparencias": {"Bobo": "bobo"},
+    "habilidades": ["piada_cortante", "malabares", "risada_contagiante", "cambalhota"],
+    "golpes_por_nivel": {"3": "tropeco_ensaiado", "6": "numero_final"},
+    "subclasses": {
+      "arlequim": {"nome": "Arlequim", "prestigio": 0,
+        "descricao": "Ilusões e espelhos: ninguém sabe onde ele está.",
+        "golpes": ["truque_de_espelhos", "confete_explosivo", "plateia_encantada"],
+        "passivas": [{"tipo": "bonus", "nome": "Mil Faces", "descricao": "+8% de esquiva.",
+                      "modificadores": {"chance_esquiva": 0.08}}],
+        "especializacoes": {
+          "mestre_das_mascaras": {"sprite": "bobo_mascaras", "nome": "Mestre das Máscaras", "regiao": "floresta",
+            "descricao": "Cada máscara é uma pessoa diferente. Todas perigosas.",
+            "modificadores": {"chance_esquiva": 0.05}, "golpes": ["baile_de_mascaras"]}}},
+      "palhaco_macabro": {"sprite": "bobo_macabro", "nome": "Palhaço Macabro", "prestigio": 3,
+        "descricao": "Piadas que amaldiçoam. A plateia sempre morre de rir.",
+        "golpes": ["riso_macabro", "torta_podre", "pegadinha_cruel"],
+        "passivas": [{"tipo": "bonus", "nome": "Humor Negro", "descricao": "Debuffs 15% mais fortes.",
+                      "modificadores": {"potencia_suporte": 0.15}}],
+        "especializacoes": {
+          "riso_da_cripta": {"sprite": "bobo_cripta", "nome": "Riso da Cripta", "regiao": "catedral",
+            "descricao": "A gargalhada que acorda os mortos.",
+            "modificadores": {"potencia_suporte": 0.1}, "golpes": ["gargalhada_fatal"]}}},
+      "malabarista_de_facas": {"sprite": "bobo_malabarista", "nome": "Malabarista de Facas", "prestigio": 6,
+        "descricao": "Nunca segura menos de seis facas. Às vezes erra o malabares. Nunca o alvo.",
+        "golpes": ["facas_ao_ar", "faca_certeira", "giro_de_laminas"],
+        "passivas": [{"tipo": "bonus", "nome": "Mãos Rápidas", "descricao": "+8% de crítico.",
+                      "modificadores": {"chance_critico": 0.08}}],
+        "especializacoes": {
+          "chuva_de_aco": {"sprite": "bobo_aco", "nome": "Chuva de Aço", "regiao": "minas",
+            "descricao": "Quando ele joga as facas para cima, é melhor correr.",
+            "modificadores": {"chance_critico": 0.05}, "golpes": ["tempestade_de_facas"]}}}
+    }
+  },
+  "monge": {
+    "nome": "Monge",
+    "papel": "Punhos e espíritos",
+    "descricao": "Treinou num mosteiro que o mundo esqueceu. Luta de mãos nuas e conversa com os espíritos.",
+    "atributos_principais": [
+      "destreza",
+      "fe"
+    ],
+    "atributos": {
+      "forca": 4,
+      "destreza": 6,
+      "constituicao": 5,
+      "inteligencia": 2,
+      "fe": 5,
+      "sorte": 3,
+      "carisma": 2
+    },
+    "vida_base": 34,
+    "iniciativa": [
+      5,
+      10
+    ],
+    "aparencias": {
+      "Monge": "monge"
+    },
+    "habilidades": [
+      "palma_aberta",
+      "chute_giratorio",
+      "meditacao",
+      "espirito_guardiao"
+    ],
+    "golpes_por_nivel": {
+      "3": "punho_de_pedra",
+      "6": "cem_punhos"
+    },
+    "subclasses": {
+      "punho_de_ferro": {
+        "nome": "Punho de Ferro",
+        "prestigio": 0,
+        "descricao": "Corpo de aço, punhos de brasa.",
+        "golpes": [
+          "soco_do_dragao",
+          "postura_da_montanha",
+          "chute_do_trovao"
+        ],
+        "passivas": [
+          {
+            "tipo": "bonus",
+            "nome": "Corpo Temperado",
+            "descricao": "+10% de dano.",
+            "modificadores": {
+              "dano_causado": 0.1
+            }
+          }
+        ],
+        "especializacoes": {
+          "dragao_interior": {
+            "sprite": "monge_dragao",
+            "nome": "Dragão Interior",
+            "regiao": "minas",
+            "descricao": "O fogo que ele guardava agora queima para fora.",
+            "modificadores": {
+              "dano_causado_fogo": 0.2
+            },
+            "golpes": [
+              "furia_do_dragao_interior"
+            ]
+          }
+        }
+      },
+      "caminho_do_espirito": {
+        "sprite": "monge_espirito",
+        "nome": "Caminho do Espírito",
+        "prestigio": 3,
+        "descricao": "Nunca luta sozinho: tigres, garças e macacos de névoa lutam com ele.",
+        "golpes": [
+          "tigre_espiritual",
+          "elo_espiritual",
+          "bando_de_macacos"
+        ],
+        "passivas": [
+          {
+            "tipo": "bonus",
+            "nome": "Mil Ancestrais",
+            "descricao": "+1 invocação ao mesmo tempo.",
+            "modificadores": {
+              "max_invocacoes": 1
+            }
+          }
+        ],
+        "especializacoes": {
+          "voz_dos_ancestrais": {
+            "sprite": "monge_ancestral",
+            "nome": "Voz dos Ancestrais",
+            "regiao": "catedral",
+            "descricao": "Os mortos do mosteiro respondem ao chamado.",
+            "modificadores": {
+              "max_invocacoes": 1
+            },
+            "golpes": [
+              "chamado_ancestral"
+            ]
+          }
+        }
+      },
+      "mestre_da_serenidade": {
+        "sprite": "monge_serenidade",
+        "nome": "Mestre da Serenidade",
+        "prestigio": 6,
+        "descricao": "A calma também é uma arma. E cura.",
+        "golpes": [
+          "toque_curativo",
+          "aura_serena",
+          "palma_do_vazio"
+        ],
+        "passivas": [
+          {
+            "tipo": "bonus",
+            "nome": "Mãos Serenas",
+            "descricao": "+15% de cura causada.",
+            "modificadores": {
+              "cura_causada": 0.15
+            }
+          }
+        ],
+        "especializacoes": {
+          "lotus_eterno": {
+            "sprite": "monge_lotus",
+            "nome": "Lótus Eterno",
+            "regiao": "floresta",
+            "descricao": "Floresce até no lodo da Floresta Morta.",
+            "modificadores": {
+              "cura_causada": 0.1
+            },
+            "golpes": [
+              "florescer_do_lotus"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "feiticeira": {
+    "nome": "Feiticeira",
+    "papel": "Maldições e familiares",
+    "descricao": "Aprendeu com a avó, que aprendeu com o diabo. Nunca anda sem um corvo por perto.",
+    "atributos_principais": [
+      "inteligencia",
+      "carisma"
+    ],
+    "atributos": {
+      "forca": 1,
+      "destreza": 4,
+      "constituicao": 4,
+      "inteligencia": 6,
+      "fe": 3,
+      "sorte": 4,
+      "carisma": 5
+    },
+    "vida_base": 31,
+    "iniciativa": [
+      4,
+      9
+    ],
+    "aparencias": {
+      "Feiticeira": "feiticeira"
+    },
+    "habilidades": [
+      "faisca_maldita",
+      "chamar_corvo",
+      "mau_olhado",
+      "caldeirao_borbulhante"
+    ],
+    "golpes_por_nivel": {
+      "3": "praga_menor",
+      "6": "noite_sem_lua"
+    },
+    "subclasses": {
+      "senhora_dos_familiares": {
+        "nome": "Senhora dos Familiares",
+        "prestigio": 0,
+        "descricao": "Gatos, sapos e corvos: a família dela é grande e faminta.",
+        "golpes": [
+          "chamar_gato_negro",
+          "vinculo_de_sangue",
+          "chamar_sapo"
+        ],
+        "passivas": [
+          {
+            "tipo": "bonus",
+            "nome": "Ninhada",
+            "descricao": "+1 invocação ao mesmo tempo.",
+            "modificadores": {
+              "max_invocacoes": 1
+            }
+          }
+        ],
+        "especializacoes": {
+          "mae_da_ninhada": {
+            "sprite": "feiticeira_ninhada",
+            "nome": "Mãe da Ninhada",
+            "regiao": "floresta",
+            "descricao": "Cada bicho da floresta atende quando ela assobia.",
+            "modificadores": {
+              "max_invocacoes": 1
+            },
+            "golpes": [
+              "revoada"
+            ]
+          }
+        }
+      },
+      "bruxa_da_lua": {
+        "sprite": "feiticeira_lua",
+        "nome": "Bruxa da Lua",
+        "prestigio": 3,
+        "descricao": "Gelo e sombra, conforme a lua manda.",
+        "golpes": [
+          "raio_lunar",
+          "eclipse",
+          "nevoa_da_lua"
+        ],
+        "passivas": [
+          {
+            "tipo": "bonus",
+            "nome": "Luar",
+            "descricao": "+10% de dano.",
+            "modificadores": {
+              "dano_causado": 0.1
+            }
+          }
+        ],
+        "especializacoes": {
+          "rainha_do_eclipse": {
+            "sprite": "feiticeira_eclipse",
+            "nome": "Rainha do Eclipse",
+            "regiao": "catedral",
+            "descricao": "Quando ela canta, a lua sangra.",
+            "modificadores": {
+              "dano_causado_sombra": 0.15
+            },
+            "golpes": [
+              "lua_de_sangue"
+            ]
+          }
+        }
+      },
+      "senhora_das_maldicoes": {
+        "sprite": "feiticeira_maldicoes",
+        "nome": "Senhora das Maldições",
+        "prestigio": 6,
+        "descricao": "Cada palavra dela é uma praga. Algumas duram para sempre.",
+        "golpes": [
+          "boneco_de_vodu",
+          "maldicao_da_ruina",
+          "praga_rogada"
+        ],
+        "passivas": [
+          {
+            "tipo": "bonus",
+            "nome": "Língua Venenosa",
+            "descricao": "Debuffs 15% mais fortes.",
+            "modificadores": {
+              "potencia_suporte": 0.15
+            }
+          }
+        ],
+        "especializacoes": {
+          "bruxa_velha": {
+            "sprite": "feiticeira_velha",
+            "nome": "Bruxa Velha",
+            "regiao": "minas",
+            "descricao": "Velha como as Minas, e tão cheia de segredos quanto elas.",
+            "modificadores": {
+              "potencia_suporte": 0.1
+            },
+            "golpes": [
+              "sentenca_da_bruxa"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "_secretas": "Classes secretas (Reino dos Ratos, etapa 6): 'requer' = conquista do progresso que libera; até lá não aparecem em lugar nenhum. 'anuncio' = a frase da tela de herói novo no acampamento.",
+  "medico_da_peste": {
+    "nome": "Médico da Peste",
+    "nome_curto": "Médico",
+    "papel": "Suporte",
+    "requer": "chefe:rainha_dos_ratos",
+    "anuncio": "Viu a Rainha cair e tirou a máscara do bolso. Não reza: corta, ferve e queima o que adoece.",
+    "descricao": "Veio de uma cidade que a Peste apagou do mapa. Cura com ervas, ferro em brasa e frascos, nunca com fé.",
+    "atributos_principais": ["inteligencia", "destreza"],
+    "atributos": {"forca": 2, "destreza": 5, "constituicao": 5, "inteligencia": 6, "fe": 1, "sorte": 3, "carisma": 3},
+    "vida_base": 32,
+    "iniciativa": [3, 8],
+    "aparencias": {"Médico da Peste": "medico_da_peste"},
+    "habilidades": ["lanceta", "tonico_amargo", "frasco_de_fumaca", "unguento_de_ervas"],
+    "golpes_por_nivel": {"3": "fumigacao", "6": "quarentena"},
+    "passivas": [
+      {"tipo": "bonus", "nome": "Máscara de Bico", "descricao": "Metade das vezes, a Peste e o veneno não pegam nele.",
+       "modificadores": {"resiste_peste": 0.5, "resiste_veneno": 0.5}}
+    ],
+    "subclasses": {
+      "doutor_da_peste": {
+        "nome": "Doutor da Peste",
+        "prestigio": 0,
+        "descricao": "Máscara negra, lentes verdes: onde ele passa, a doença recua.",
+        "golpes": ["cauterizar", "teriaga", "reanimacao"],
+        "passivas": [
+          {"tipo": "bonus", "nome": "Juramento", "descricao": "+15% de cura causada.", "modificadores": {"cura_causada": 0.15}}
+        ],
+        "especializacoes": {
+          "mestre_da_quarentena": {
+            "sprite": "medico_quarentena",
+            "nome": "Mestre da Quarentena",
+            "regiao": "catedral",
+            "descricao": "Já fechou cidades inteiras com panos encerados. Ninguém entra, nada sai.",
+            "modificadores": {"cura_causada": 0.1, "resiste_peste": 0.5},
+            "golpes": ["cordao_sanitario"]
+          }
+        }
+      },
+      "boticario": {
+        "sprite": "medico_boticario",
+        "nome": "Boticário",
+        "prestigio": 3,
+        "descricao": "Frascos, pós e venenos: cura quem paga e mata quem atrapalha.",
+        "golpes": ["frasco_corrosivo", "nuvem_de_miasma", "frasco_letal"],
+        "passivas": [
+          {"tipo": "bonus", "nome": "Alquimia", "descricao": "Venenos e debuffs 15% mais fortes.",
+           "modificadores": {"potencia_suporte": 0.15}}
+        ],
+        "especializacoes": {
+          "envenenador_da_corte": {
+            "sprite": "medico_envenenador",
+            "nome": "Envenenador da Corte",
+            "regiao": "floresta",
+            "descricao": "Serviu três reis. Os três morreram de \"febre\".",
+            "modificadores": {"dano_causado_veneno": 0.15},
+            "golpes": ["vinho_da_corte"]
+          }
+        }
+      },
+      "cirurgiao_do_esgoto": {
+        "sprite": "medico_cirurgiao",
+        "nome": "Cirurgião do Esgoto",
+        "prestigio": 6,
+        "descricao": "Serra, lanceta e mão firme: aprendeu anatomia nos esgotos, cortando o que a Peste deixou.",
+        "golpes": ["amputar", "serra_de_ossos", "costura_rapida"],
+        "passivas": [
+          {"tipo": "bonus", "nome": "Mão Firme", "descricao": "+8% de crítico e +15% de dano crítico.",
+           "modificadores": {"chance_critico": 0.08, "dano_critico": 0.15}}
+        ],
+        "especializacoes": {
+          "anatomista_proibido": {
+            "sprite": "medico_anatomista",
+            "nome": "Anatomista Proibido",
+            "regiao": "minas",
+            "descricao": "Abriu os mortos para entender os vivos. Os vivos não gostaram.",
+            "modificadores": {"dano_causado": 0.1},
+            "golpes": ["dissecar"]
+          }
+        }
+      }
+    }
+  },
+  "senhor_dos_ratos": {
+    "nome": "Senhor dos Ratos",
+    "nome_curto": "Sr. Ratos",
+    "papel": "Invocador",
+    "requer": "feito:corte_completa",
+    "anuncio": "O Rei caiu do próprio trono, e os ratos foram atrás de outro dono. Acharam um que os escuta.",
+    "descricao": "Um mendigo que os ratos escolheram. Fala com eles, e eles respondem com dentes, moscas e Peste.",
+    "atributos_principais": ["inteligencia", "carisma"],
+    "atributos": {"forca": 2, "destreza": 3, "constituicao": 5, "inteligencia": 5, "fe": 2, "sorte": 4, "carisma": 6},
+    "vida_base": 30,
+    "iniciativa": [3, 8],
+    "aparencias": {"Senhor dos Ratos": "senhor_dos_ratos"},
+    "habilidades": ["toque_pestilento", "chamar_ratos", "nuvem_de_moscas", "sugar_a_vida"],
+    "golpes_por_nivel": {"3": "maldicao_da_peste", "6": "mar_de_ratos"},
+    "passivas": [
+      {"tipo": "bonus", "nome": "Rei dos Esgotos", "descricao": "A Peste nunca pega nele.",
+       "modificadores": {"resiste_peste": 1.0}}
+    ],
+    "subclasses": {
+      "rei_dos_bandos": {
+        "nome": "Rei dos Bandos",
+        "prestigio": 0,
+        "descricao": "Onde ele pisa, o chão se mexe: ratos e mais ratos, todos dele.",
+        "golpes": ["chamar_ratazana", "ordem_do_bando", "enxurrada_de_ratos"],
+        "passivas": [
+          {"tipo": "bonus", "nome": "Ninho Grande", "descricao": "+1 invocação ao mesmo tempo.", "modificadores": {"max_invocacoes": 1}}
+        ],
+        "especializacoes": {
+          "pai_dos_ratos": {
+            "sprite": "senhor_pai_dos_ratos",
+            "nome": "Pai dos Ratos",
+            "regiao": "minas",
+            "descricao": "Cada rato das Minas é filho dele. Todos voltam para casa quando ele chama.",
+            "modificadores": {"max_invocacoes": 1},
+            "golpes": ["o_ninho"]
+          }
+        }
+      },
+      "senhor_das_moscas": {
+        "sprite": "senhor_moscas",
+        "nome": "Senhor das Moscas",
+        "prestigio": 3,
+        "descricao": "As moscas o seguem desde que ele morreu pela primeira vez. Elas levam a Peste aonde ele manda.",
+        "golpes": ["praga_de_moscas", "larvas", "zumbido"],
+        "passivas": [
+          {"tipo": "bonus", "nome": "Zumbido", "descricao": "Pragas e debuffs 15% mais fortes.",
+           "modificadores": {"potencia_suporte": 0.15}}
+        ],
+        "especializacoes": {
+          "senhor_do_enxame": {
+            "sprite": "senhor_enxame",
+            "nome": "Senhor do Enxame",
+            "regiao": "catedral",
+            "descricao": "Não se vê mais o rosto dele: só a nuvem, e os dois olhos vermelhos lá dentro.",
+            "modificadores": {"potencia_suporte": 0.1},
+            "golpes": ["nuvem_negra"]
+          }
+        }
+      },
+      "profeta_da_praga": {
+        "sprite": "senhor_profeta",
+        "nome": "Profeta da Praga",
+        "prestigio": 6,
+        "descricao": "Lê o futuro nos bubões. Quem está doente alimenta a fome dele.",
+        "golpes": ["beijo_da_peste", "febre_rogada", "colheita_da_praga"],
+        "passivas": [
+          {"tipo": "bonus", "nome": "Fome da Praga", "descricao": "Rouba 8% do dano que causa como vida.",
+           "modificadores": {"roubo_vida": 0.08}}
+        ],
+        "especializacoes": {
+          "arauto_do_fim": {
+            "sprite": "senhor_arauto",
+            "nome": "Arauto do Fim",
+            "regiao": "floresta",
+            "descricao": "Anuncia a última praga. Ninguém acredita nele até ser tarde.",
+            "modificadores": {"dano_causado": 0.1},
+            "golpes": ["fim_dos_tempos"]
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+# Texto com fim de linha normalizado no repositório (o Git converte ao baixar no Windows)
+* text=auto
+
+# Arquivos binários: nunca mexer no conteúdo nem tentar mostrar diferenças
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.wav binary
+*.ogg binary
+*.ttf binary
+*.zip binary
+*.exe binary

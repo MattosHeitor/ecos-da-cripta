@@ -1,0 +1,64 @@
+{
+  "_comentario": "Elementos de dano. Cada golpe tem um 'elemento' (habilidades.json; sem ele = fisico). Resistências: valor positivo = FRACO (recebe mais dano, ex.: 0.5 = +50%), negativo = RESISTE (ex.: -0.5 = metade). Viram os modificadores dano_recebido_<elemento> do lutador; quem causa usa dano_causado_<elemento>. 'status' diz o elemento do dano por turno.",
+
+  "elementos": {
+    "fisico":  {"nome": "físico",  "cor": [226, 218, 204]},
+    "fogo":    {"nome": "fogo",    "cor": [255, 140, 60]},
+    "gelo":    {"nome": "gelo",    "cor": [150, 210, 255]},
+    "raio":    {"nome": "raio",    "cor": [240, 230, 120]},
+    "veneno":  {"nome": "veneno",  "cor": [150, 220, 80]},
+    "luz":     {"nome": "luz",     "cor": [255, 240, 190]},
+    "sombra":  {"nome": "sombra",  "cor": [180, 120, 240]}
+  },
+
+  "status": {"queimadura": "fogo", "veneno": "veneno", "sangramento": "fisico", "espinhos": "fisico"},
+
+  "_familias": "---- resistências de cada família de inimigos (o bestiário mostra as fraquezas) ----",
+  "familias": {
+
+    "eclipse":            {"raio": 0.3, "luz": -0.4, "sombra": -0.2},
+    "construtos":         {"raio": 0.5, "veneno": -0.8, "gelo": -0.2},
+    "sombras":            {"luz": 0.5, "sombra": -0.5},
+
+    "elementais_de_gelo": {"fogo": 0.6, "gelo": -0.8, "raio": 0.2},
+    "espectros":          {"luz": 0.4, "sombra": -0.3, "gelo": -0.5},
+
+    "kobolds":            {"gelo": 0.3, "fogo": -0.2},
+    "elementais_de_fogo": {"gelo": 0.6, "fogo": -0.8, "veneno": -0.3},
+
+    "ordem_caida":        {"sombra": 0.3, "luz": -0.4},
+    "pestes":             {"fogo": 0.5, "gelo": 0.2},
+
+    "pantanosos":         {"gelo": 0.3, "raio": 0.4, "veneno": -0.5},
+
+    "feras":              {"fogo": 0.2},
+    "fungos":             {"fogo": 0.4, "veneno": -0.75},
+    "plantas":            {"fogo": 0.5, "gelo": 0.2, "veneno": -0.5},
+    "assombracoes":       {"luz": 0.4, "sombra": -0.4, "fisico": -0.1},
+    "goblins":            {"fogo": 0.25},
+    "mortos_vivos":       {"luz": 0.3, "fogo": 0.2, "veneno": -0.75, "sombra": -0.5},
+    "orcs":               {"gelo": 0.25, "fisico": -0.1},
+    "bruxaria":           {"luz": 0.2, "sombra": -0.3},
+    "vampiros":           {"luz": 0.3, "fogo": 0.2, "sombra": -0.4},
+    "golens":             {"raio": 0.5, "fisico": -0.3, "veneno": -0.75},
+    "circo_macabro":      {"fogo": 0.3, "sombra": -0.25},
+    "insetos":            {"fogo": 0.5, "gelo": 0.25, "veneno": -0.5},
+    "dragoes":            {"gelo": 0.4, "fogo": -0.5},
+    "herois_corrompidos": {"luz": 0.2, "sombra": -0.25},
+    "chefes":             {"luz": 0.15}
+  },
+
+  "_inimigos": "---- exceções por inimigo (somam com as da família) ----",
+  "inimigos": {
+    "lich":               {"gelo": -0.5, "fogo": 0.25},
+    "golem_carregando":   {"fogo": -0.6, "gelo": 0.5},
+    "golem_carne":        {"fisico": 0.2, "fogo": 0.3},
+    "dragao_osseo":       {"luz": 0.3, "fogo": 0.2, "veneno": -0.75},
+    "aranha_mae":         {"fogo": 0.25},
+    "morcego_gigante":    {"raio": 0.3},
+    "rei_sombrio":        {"sombra": -0.5},
+    "inquisidor":         {"luz": -0.6, "sombra": 0.4},
+    "paladino_profano":   {"luz": -0.3, "sombra": 0.3},
+    "feiticeira_renegada": {"raio": -0.3}
+  }
+}

@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ecos da Cripta: como instalar e jogar</title>
+<style>
+  :root {
+    --fundo: #0d0a12; --painel: #1a1420; --painel-claro: #241c2c; --borda: #4a3a2a; --ouro: #e9c46a;
+    --ouro-escuro: #a8823a; --texto: #ece4d6; --fraco: #b3a898; --roxo: #9b72d0; --verde: #7fcf8a; --vermelho: #e0706a;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fundo); color: var(--texto); font: 17px/1.6 "Segoe UI", system-ui, sans-serif; }
+  main { max-width: 880px; margin: 0 auto; padding: 24px 16px 64px; }
+  header { text-align: center; padding: 28px 0 8px; }
+  header h1 { margin: 0; color: var(--ouro); font-size: 2.3em; letter-spacing: 0.04em; }
+  header p { margin: 6px 0 0; color: var(--fraco); }
+  h2 { color: var(--ouro); border-bottom: 2px solid var(--borda); padding-bottom: 6px; margin-top: 44px; }
+  h3 { color: var(--ouro); margin: 28px 0 8px; }
+  a { color: var(--roxo); }
+  code, .tecla { background: var(--painel-claro); border: 1px solid var(--borda); border-radius: 5px; padding: 1px 7px;
+                 font-family: Consolas, monospace; font-size: 0.92em; white-space: nowrap; }
+  .botao { background: #3a2c1c; border: 1px solid var(--ouro-escuro); color: var(--ouro); border-radius: 5px;
+           padding: 1px 8px; font-weight: 600; white-space: nowrap; }
+  .caixa { background: var(--painel); border: 1px solid var(--borda); border-radius: 10px; padding: 14px 20px; margin: 18px 0; }
+  .caixa.dica { border-left: 5px solid var(--roxo); }
+  .caixa.atencao { border-left: 5px solid var(--vermelho); }
+  .caixa.resumo { border: 2px solid var(--ouro-escuro); }
+  .caixa h3:first-child, .caixa p:first-child { margin-top: 0; }
+  ol, ul { padding-left: 1.4em; }
+  li { margin: 6px 0; }
+  figure { margin: 18px 0; }
+  figure img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--borda); display: block; }
+  figcaption { color: var(--fraco); font-size: 0.9em; margin-top: 6px; text-align: center; }
+  table { border-collapse: collapse; width: 100%; margin: 12px 0; }
+  td, th { border: 1px solid var(--borda); padding: 7px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--painel-claro); color: var(--ouro); }
+  details { background: var(--painel); border: 1px solid var(--borda); border-radius: 8px; padding: 10px 16px; margin: 10px 0; }
+  summary { cursor: pointer; font-weight: 600; color: var(--ouro); }
+  .indice { columns: 2; column-gap: 32px; }
+  .indice ol { margin: 0; }
+  .indice li:first-child { margin-top: 0; }
+  @media (max-width: 640px) { body { font-size: 16px; } .indice { columns: 1; } header h1 { font-size: 1.8em; } }
+  footer { color: var(--fraco); text-align: center; margin-top: 56px; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <h1>ECOS DA CRIPTA</h1>
+  <p>Como instalar e jogar com os amigos · versão {{VERSAO}}</p>
+</header>
+
+<div class="caixa resumo">
+  <h3>Resumo rápido</h3>
+  <ol>
+    <li>Instale o jogo com o <b>Instalar Ecos da Cripta {{VERSAO}}.exe</b> (dois cliques, <span class="botao">Instalar</span>, <span class="botao">Concluir</span>).</li>
+    <li>Estão em casas diferentes? Todos instalam a <b>Radmin VPN</b> e entram na mesma rede dela.</li>
+    <li>Quem hospeda: <span class="botao">Jogar em grupo</span> → <span class="botao">Criar partida</span> → manda o <b>código</b> que aparece.</li>
+    <li>Os outros: <span class="botao">Jogar em grupo</span> → digitam o código → <span class="botao">Entrar</span>.</li>
+    <li>Cada um escolhe os seus heróis, todos marcam <span class="botao">Pronto!</span> e quem hospeda clica <span class="botao">Iniciar</span>.</li>
+  </ol>
+</div>
+
+<div class="indice">
+  <ol>
+    <li><a href="#precisa">O que você precisa</a></li>
+    <li><a href="#instalar">Instalar o jogo</a></li>
+    <li><a href="#mesma-casa">Jogar junto na mesma casa</a></li>
+    <li><a href="#internet">Jogar junto pela internet (Radmin VPN)</a></li>
+    <li><a href="#lobby">No acampamento do grupo</a></li>
+    <li><a href="#jogando">Durante a partida</a></li>
+    <li><a href="#caiu">Se alguém cair ou fechar o jogo</a></li>
+    <li><a href="#problemas">Problemas comuns</a></li>
+    <li><a href="#teclas">Teclas</a></li>
+    <li><a href="#atualizar">Atualizar e desinstalar</a></li>
+  </ol>
+</div>
+
+<h2 id="precisa">1. O que você precisa</h2>
+<ul>
+  <li>Windows 10 ou 11 (64 bits) e uns 300 MB livres. Não precisa instalar Python nem mais nada.</li>
+  <li>Todos com <b>a mesma versão</b> do jogo (o mesmo instalador). Com versões diferentes o jogo avisa e não deixa entrar.</li>
+  <li>De 2 a 4 jogadores, com até 5 heróis no total no grupo.</li>
+  <li>Para jogar de casas diferentes: a <b>Radmin VPN</b> (grátis), explicada no <a href="#internet">passo 4</a>.</li>
+</ul>
+
+<h2 id="instalar">2. Instalar o jogo</h2>
+<ol>
+  <li>Dê dois cliques em <b>Instalar Ecos da Cripta {{VERSAO}}.exe</b>.</li>
+  <li>Se aparecer <b>"O Windows protegeu o computador"</b>: clique em <b>Mais informações</b> e depois em
+      <span class="botao">Executar assim mesmo</span>. Isso aparece porque o jogo não tem uma assinatura digital
+      paga; acontece só na primeira vez.</li>
+  <li>Deixe marcado <b>"Criar um atalho na área de trabalho"</b> e clique em <span class="botao">Instalar</span>.</li>
+  <li>Clique em <span class="botao">Concluir</span>: o jogo abre.</li>
+</ol>
+<div class="caixa dica">
+  <p>O jogo fica em <code>%LOCALAPPDATA%\Programs\Ecos da Cripta</code> e não pede senha de administrador. O seu
+  progresso (Brasas, conquistas, skins) fica em <code>%APPDATA%\Ecos da Cripta</code> e não se perde ao
+  reinstalar ou atualizar.</p>
+</div>
+<div class="caixa atencao">
+  <p>Se o antivírus reclamar do instalador ou do jogo, é um falso alarme comum com jogos feitos em Python. Escolha
+  <b>"Permitir"</b> ou <b>"Restaurar"</b> e, se precisar, adicione a pasta do jogo às exceções do antivírus.</p>
+</div>
+<figure>
+  <img src="imagens/titulo.jpg" alt="Tela de título do Ecos da Cripta com o botão Jogar em grupo">
+  <figcaption>A tela de título. Para jogar sozinho, use o Acampamento; com os amigos, <b>Jogar em grupo</b>.</figcaption>
+</figure>
+
+<h2 id="mesma-casa">3. Jogar junto na mesma casa (mesmo Wi-Fi)</h2>
+<ol>
+  <li><b>Quem vai hospedar</b> (de preferência o PC mais forte, que vai ficar ligado a partida toda): no título,
+      <span class="botao">Jogar em grupo</span>, escreva o seu nome, escolha uma cor e clique em
+      <span class="botao">Criar partida</span>.</li>
+  <li>Na primeira vez o jogo explica o aviso do firewall: clique em <span class="botao">Entendi</span>. Logo depois o
+      Windows pergunta se o Ecos da Cripta pode usar a rede: marque <b>Redes privadas</b> e clique em
+      <span class="botao">Permitir acesso</span>.</li>
+  <li><b>Os outros</b>: <span class="botao">Jogar em grupo</span>, nome e cor. A partida aparece sozinha em
+      <b>"Partidas na rede local"</b>: é só clicar nela. Se não aparecer, digite o código que o host vê e clique em
+      <span class="botao">Entrar</span>.</li>
+</ol>
+<figure>
+  <img src="imagens/firewall.jpg" alt="Aviso sobre o firewall antes de hospedar">
+  <figcaption>O aviso que aparece na primeira vez que você hospeda.</figcaption>
+</figure>
+
+<h2 id="internet">4. Jogar junto pela internet (Radmin VPN)</h2>
+<p>A Radmin VPN coloca todo mundo numa "rede de casa" virtual, como se estivessem no mesmo Wi-Fi. É grátis e
+leva uns 5 minutos para configurar uma vez.</p>
+
+<h3>4.1. Todos: instalar a Radmin VPN</h3>
+<ol>
+  <li>Entre no site oficial <a href="https://www.radmin-vpn.com/br/">radmin-vpn.com/br</a>, baixe e instale.</li>
+  <li>Abra a Radmin VPN e deixe ela ligada enquanto jogam.</li>
+</ol>
+
+<h3>4.2. Quem hospeda: criar a rede</h3>
+<ol>
+  <li>Na Radmin VPN, clique em <span class="botao">Criar rede</span> (em inglês: <i>Create network</i>).</li>
+  <li>Escolha um <b>nome da rede</b> e uma <b>senha</b> e clique em <span class="botao">Criar</span>.</li>
+  <li>Mande o nome e a senha para os amigos (WhatsApp, Discord...).</li>
+</ol>
+
+<h3>4.3. Os outros: entrar na rede</h3>
+<ol>
+  <li>Na Radmin VPN, clique em <span class="botao">Entrar em rede</span> (em inglês: <i>Join network</i>).</li>
+  <li>Digite o nome da rede e a senha e clique em <span class="botao">Entrar</span>.</li>
+  <li>Pronto: a rede e as pessoas dela aparecem na janela da Radmin VPN.</li>
+</ol>
+
+<h3>4.4. No jogo</h3>
+<ol>
+  <li><b>Quem hospeda</b>: <span class="botao">Jogar em grupo</span> → <span class="botao">Criar partida</span>. Na
+      primeira vez, o aviso do firewall: <span class="botao">Entendi</span> e, quando o Windows perguntar, marque
+      <b>Redes privadas e Redes públicas</b> (a rede da Radmin costuma aparecer como pública) e clique em
+      <span class="botao">Permitir acesso</span>.</li>
+  <li>No acampamento do grupo, o <b>código da partida</b> aparece à esquerda. Em cima dele está escrito de que rede
+      ele é: precisa dizer <b>"Radmin VPN"</b>. Se disser "rede local", clique na linha do IP
+      (<span class="botao">trocar de rede</span>) até aparecer "Radmin VPN".</li>
+  <li>Mande esse código para os amigos (ex.: <code>0D8R-5G7</code>).</li>
+  <li><b>Os outros</b>: <span class="botao">Jogar em grupo</span>, digitem o código em <b>"Código ou IP do host"</b> e
+      cliquem em <span class="botao">Entrar</span>. Às vezes a partida também aparece na lista.</li>
+</ol>
+<figure>
+  <img src="imagens/lobby_codigo.jpg" alt="Acampamento do grupo com o código da partida da Radmin VPN">
+  <figcaption>O código da partida, à esquerda: em cima dele aparece "Radmin VPN". A linha do IP troca de rede.</figcaption>
+</figure>
+<figure>
+  <img src="imagens/entrar.jpg" alt="Tela Jogar em grupo com o campo do código e a lista de partidas">
+  <figcaption>Quem entra: o código vai no campo da direita (ou clique na partida, se ela aparecer na lista).</figcaption>
+</figure>
+<div class="caixa dica">
+  <p>Sem a Radmin, também dá para o host abrir a porta <b>47800 (TCP)</b> no roteador e passar o IP da internet
+  dele. Mas a Radmin é bem mais fácil.</p>
+</div>
+
+<h2 id="lobby">5. No acampamento do grupo</h2>
+<ul>
+  <li>Os heróis de todo mundo sentam em volta da fogueira, com o nome do dono em cima, na cor dele.</li>
+  <li><span class="botao">Ajustar meus heróis</span> abre a Capitã: escolha as classes e quantos heróis você leva.
+      O grupo inteiro tem <b>no máximo 5 heróis</b> (ex.: 2 jogadores = 3 + 2; 4 jogadores = 2 + 1 + 1 + 1).</li>
+  <li>Os outros personagens do acampamento funcionam como no jogo sozinho (talentos, raça, skins, bênçãos...).</li>
+  <li>Converse pela <b>Conversa</b> (<span class="tecla">Enter</span> abre e manda) ou mande um emote. Os dois
+      painéis minimizam no ▲.</li>
+  <li>Quando estiver pronto, clique em <span class="botao">Pronto!</span>. Quando todos estiverem prontos, quem hospeda
+      clica em <span class="botao">Iniciar</span>.</li>
+</ul>
+
+<h2 id="jogando">6. Durante a partida</h2>
+<ul>
+  <li><b>Mapa e eventos são votados</b>: clique na carta que você quer. Cada carta mostra quem votou nela. Empate é
+      sorteado; depois de 40 segundos vale o que foi votado.</li>
+  <li><b>No combate, cada um joga com os seus heróis.</b> Na vez de um herói de outra pessoa aparece
+      "Fulano escolhendo...". Quem demorar mais de 45 segundos tem a vez jogada pela IA.</li>
+  <li>Nas recompensas, na loja e nos serviços, o grupo segue quando todos clicarem em continuar.</li>
+  <li><b>Cada um tem o seu ouro e a sua mochila</b> (50 espaços). O <b>baú da equipe</b> é de todos: guarde lá o que
+      serve para outro jogador. Na loja e no menu do mapa dá para <b>enviar ouro</b> a alguém.</li>
+  <li>No inventário, a seta verde e o rostinho em cada peça mostram para qual herói (de qualquer jogador) ela é melhor.</li>
+  <li>No fim da run, cada um guarda no próprio progresso as Brasas, as conquistas e as suas peças, e o grupo volta ao
+      acampamento para jogar de novo.</li>
+</ul>
+<figure>
+  <img src="imagens/mapa.jpg" alt="Mapa com a votação do caminho">
+  <figcaption>O mapa: a Bia já votou na luta; embaixo, quem falta votar e o tempo (e, ao lado de cada nome, a latência em ms).</figcaption>
+</figure>
+<figure>
+  <img src="imagens/combate.jpg" alt="Combate em grupo na vez de um herói da Bia">
+  <figcaption>No combate, cada herói tem dono. Aqui é a vez de um herói da Bia.</figcaption>
+</figure>
+
+<h2 id="caiu">7. Se alguém cair ou fechar o jogo</h2>
+<ul>
+  <li><b>A internet caiu</b>: o jogo tenta voltar sozinho por até 90 segundos. Enquanto isso, a IA joga com os seus heróis.</li>
+  <li><b>Fechou o jogo</b> (ou o PC travou): abra de novo → <span class="botao">Jogar em grupo</span> → clique em
+      <b>"Voltar à partida de ..."</b> na lista ou digite o mesmo código. Você volta exatamente onde o grupo está,
+      até no meio de uma luta.</li>
+  <li><b>Quem hospedou fechou o jogo</b>: a partida fica salva no PC dele. Quando ele abrir
+      <span class="botao">Jogar em grupo</span> → <span class="botao">Retomar partida</span>, todos entram de novo
+      pelo código e a run continua de onde parou.</li>
+</ul>
+<figure>
+  <img src="imagens/voltar.jpg" alt="Tela Jogar em grupo com Retomar partida e Voltar à partida">
+  <figcaption>"Retomar partida" (para quem hospedou) e "Voltar à partida de Ana" (para quem estava nela).</figcaption>
+</figure>
+
+<h2 id="problemas">8. Problemas comuns</h2>
+<details>
+  <summary>"Ninguém respondeu" ou "Não há partida aberta"</summary>
+  <ul>
+    <li>Quem hospeda já clicou em <b>Criar partida</b> e está no acampamento do grupo?</li>
+    <li>O código está certo? (O jogo entende O no lugar de 0 e I no lugar de 1.)</li>
+    <li>Pela internet: todos estão na mesma rede da Radmin VPN, com ela ligada? E o código mostra <b>"Radmin VPN"</b>?</li>
+    <li>O firewall de quem hospeda pode estar bloqueando: veja o próximo item.</li>
+  </ul>
+</details>
+<details>
+  <summary>Liberar o jogo no firewall (se você clicou em "Cancelar" sem querer)</summary>
+  <ol>
+    <li>Abra <b>Segurança do Windows</b> → <b>Firewall e proteção de rede</b> → <b>Permitir um aplicativo pelo firewall</b>.</li>
+    <li>Clique em <span class="botao">Alterar configurações</span>.</li>
+    <li>Ache <b>Ecos da Cripta</b> na lista e marque <b>Privada</b> e <b>Pública</b>. Se ele não estiver na lista,
+        <span class="botao">Permitir outro aplicativo...</span> → procure o <code>Ecos da Cripta.exe</code> na pasta do jogo.</li>
+    <li><span class="botao">OK</span>. Um antivírus com firewall próprio (Avast, Kaspersky, Norton...) também precisa
+        deixar o jogo e a Radmin VPN passarem.</li>
+  </ol>
+</details>
+<details>
+  <summary>"Versões diferentes" ou "os dados do jogo são diferentes"</summary>
+  <p>Alguém está com outra versão. Todos instalam o mesmo instalador (ele atualiza por cima, sem perder o progresso).</p>
+</details>
+<details>
+  <summary>A partida está lenta ou aparece "Conexão lenta"</summary>
+  <ul>
+    <li>Quem hospeda deve ser quem tem a melhor internet (de preferência no cabo, não no Wi-Fi).</li>
+    <li>Feche downloads e streams pesados durante o jogo.</li>
+    <li>Na Radmin VPN, quando a ligação direta não dá certo ela passa por um servidor do meio, que é mais lento.</li>
+  </ul>
+</details>
+<details>
+  <summary>O jogo fechou sozinho</summary>
+  <p>O motivo fica no arquivo <code>erros.txt</code> em <code>%APPDATA%\Ecos da Cripta</code> (cole esse caminho na
+  barra do Explorador de Arquivos). Mande esse arquivo para quem passou o jogo para você.</p>
+</details>
+<details>
+  <summary>A tela está pequena ou cortada</summary>
+  <p><span class="tecla">F11</span> ou <span class="tecla">Alt</span>+<span class="tecla">Enter</span> alternam a tela cheia.</p>
+</details>
+
+<h2 id="teclas">9. Teclas</h2>
+<table>
+  <tr><th>Tecla</th><th>O que faz</th></tr>
+  <tr><td>Mouse</td><td>Quase tudo: clicar, arrastar itens, botão direito nos itens para mais opções</td></tr>
+  <tr><td><span class="tecla">Esc</span></td><td>Voltar / menu</td></tr>
+  <tr><td><span class="tecla">F11</span> ou <span class="tecla">Alt</span>+<span class="tecla">Enter</span></td><td>Tela cheia</td></tr>
+  <tr><td><span class="tecla">G</span> · <span class="tecla">I</span> · <span class="tecla">B</span> · <span class="tecla">F</span></td><td>No mapa: Grupo · Inventário · Baú · Fabricação</td></tr>
+  <tr><td><span class="tecla">Enter</span> ou <span class="tecla">T</span></td><td>No acampamento do grupo: abrir a conversa</td></tr>
+  <tr><td><span class="tecla">Shift</span>+clique</td><td>No inventário: leva a pilha inteira para o outro lado (mochila ↔ baú)</td></tr>
+</table>
+<p>As teclas podem ser trocadas em <b>Opções</b>, na tela de título.</p>
+
+<h2 id="atualizar">10. Atualizar e desinstalar</h2>
+<ul>
+  <li><b>Versão nova</b>: rode o instalador novo por cima. O progresso continua.</li>
+  <li><b>Desinstalar</b>: <b>Configurações → Aplicativos → Ecos da Cripta → Desinstalar</b>. O progresso fica guardado
+      em <code>%APPDATA%\Ecos da Cripta</code> (apague essa pasta só se quiser começar do zero).</li>
+</ul>
+
+<footer>Ecos da Cripta {{VERSAO}} · boa caçada na cripta!</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{
+  "_comentario": "Sets de equipamento: peças = itens com \"set\" no itens.json. bonus = o que ganha com 2, 3 e 4 peças equipadas (acumula). passivas usam os tipos de roguelike/passivas.py.",
+  "vigilia_do_coveiro": {
+    "nome": "Vigília do Coveiro",
+    "pecas": ["capuz_do_coveiro", "casaco_do_coveiro", "botas_do_coveiro", "pa_do_coveiro"],
+    "bonus": {
+      "2": {"modificadores": {"vida_maxima": 6}, "descricao": "+6 de HP"},
+      "3": {"modificadores": {"chance_esquiva": 0.05, "furtividade": 0.1}, "descricao": "+5% de esquiva e +10% de furtividade"},
+      "4": {"modificadores": {"dano_causado": 0.12},
+            "passivas": [{"tipo": "status_inicial", "nome": "Terra Fresca", "descricao": "Começa o combate com escudo de 8.",
+                          "status": [{"status": "escudo", "valor": 8, "duracao": 3}]}],
+            "descricao": "+12% de dano e começa cada combate com escudo de 8"}
+    }
+  },
+  "ferro_negro": {
+    "nome": "Ferro Negro",
+    "pecas": ["armadura_de_ferro_negro", "elmo_de_ferro_negro", "grevas_de_ferro_negro", "escudo_de_ferro_negro"],
+    "bonus": {
+      "2": {"modificadores": {"defesa": 2}, "descricao": "+2 de defesa"},
+      "3": {"modificadores": {"vida_percentual": 0.1}, "descricao": "+10% de HP"},
+      "4": {"modificadores": {"dano_recebido": -0.1, "chance_bloqueio": 0.1}, "descricao": "-10% de dano recebido e +10% de bloqueio"}
+    }
+  },
+  "_reino_dos_ratos": "---- Reino dos Ratos (etapa 7B) ----",
+  "realeza_roedora": {
+    "nome": "Realeza Roedora",
+    "pecas": ["coroa_do_rei_dos_ratos", "capa_de_veludo_roido", "cetro_do_rei_dos_ratos", "anel_de_tampinha"],
+    "bonus": {
+      "2": {"modificadores": {"ouro_extra": 0.15}, "descricao": "+15% de ouro"},
+      "4": {"passivas": [{"tipo": "encantar_no_inicio", "nome": "Lealdade Roedora", "familias": ["pestes"], "chance": 0.25,
+                          "status": "encantado", "descricao": "No começo da luta, cada rato (ou outra peste) tem 25% de chance de virar contra os outros por 1 turno."},
+                         {"tipo": "peste_permanente", "nome": "Peste Real", "descricao": "Começa toda luta com Peste (pelo menos nível 1)."}],
+            "descricao": "Ratos inimigos às vezes viram contra os outros no começo da luta; mas quem veste começa toda luta com Peste 1"}
+    }
+  },
+  "traje_do_medico": {
+    "nome": "Traje do Médico da Peste",
+    "pecas": ["mascara_de_bico_da_peste", "sobretudo_encerado", "botas_enceradas", "bengala_do_medico"],
+    "bonus": {
+      "2": {"modificadores": {"resiste_peste": 1.0}, "descricao": "Imune à Peste"},
+      "3": {"modificadores": {"cura_causada": 0.1}, "descricao": "+10% de cura causada"},
+      "4": {"modificadores": {"cura_purifica": 1}, "descricao": "As curas de quem veste também tiram 1 nível de Peste e o veneno"}
+    }
+  },
+  "guarda_real_roedora": {
+    "nome": "Guarda Real Roedora",
+    "pecas": ["elmo_de_dedal", "tabardo_da_coroa", "lanca_de_agulha", "escudo_de_tampa_de_lata"],
+    "bonus": {
+      "2": {"modificadores": {"chance_bloqueio": 0.06}, "descricao": "+6% de bloqueio"},
+      "3": {"modificadores": {"defesa": 1}, "descricao": "+1 de defesa"},
+      "4": {"passivas": [{"tipo": "guarda_costas", "abaixo": 0.5, "nome": "Pela Coroa!",
+                          "descricao": "Uma vez por rodada, entra na frente de um golpe no aliado mais ferido (abaixo de 50%)."}],
+            "descricao": "Uma vez por rodada, entra na frente de um golpe no aliado mais ferido"}
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+ "_comentario": "Gerado por ferramentas/sprites_macabros/gerar_efeitos.py: linha de voo (loop) e de impacto (uma vez).",
+ "flecha": {
+  "voo": {
+   "y": 0,
+   "celula": [
+    48,
+    12
+   ],
+   "quadros": 4,
+   "centro": [
+    24,
+    6
+   ]
+  },
+  "impacto": {
+   "y": 12,
+   "celula": [
+    32,
+    32
+   ],
+   "quadros": 5,
+   "centro": [
+    16,
+    16
+   ]
+  },
+  "tingir": false
+ },
+ "orbe": {
+  "voo": {
+   "y": 0,
+   "celula": [
+    28,
+    20
+   ],
+   "quadros": 4,
+   "centro": [
+    18,
+    10
+   ]
+  },
+  "impacto": {
+   "y": 20,
+   "celula": [
+    36,
+    36
+   ],
+   "quadros": 5,
+   "centro": [
+    18,
+    18
+   ]
+  },
+  "tingir": true
+ },
+ "lanca": {
+  "voo": {
+   "y": 0,
+   "celula": [
+    48,
+    12
+   ],
+   "quadros": 4,
+   "centro": [
+    26,
+    6
+   ]
+  },
+  "impacto": {
+   "y": 12,
+   "celula": [
+    36,
+    36
+   ],
+   "quadros": 5,
+   "centro": [
+    18,
+    18
+   ]
+  },
+  "tingir": true
+ },
+ "teia": {
+  "voo": {
+   "y": 0,
+   "celula": [
+    26,
+    24
+   ],
+   "quadros": 4,
+   "centro": [
+    15,
+    12
+   ]
+  },
+  "impacto": {
+   "y": 24,
+   "celula": [
+    40,
+    40
+   ],
+   "quadros": 5,
+   "centro": [
+    20,
+    20
+   ]
+  },
+  "tingir": false
+ },
+ "bola_fogo": {
+  "voo": {
+   "y": 0,
+   "celula": [
+    36,
+    24
+   ],
+   "quadros": 4,
+   "centro": [
+    24,
+    12
+   ]
+  },
+  "impacto": {
+   "y": 24,
+   "celula": [
+    48,
+    48
+   ],
+   "quadros": 5,
+   "centro": [
+    24,
+    24
+   ]
+  },
+  "tingir": false
+ }
+}

@@ -1,0 +1,47 @@
+{
+  "_comentario": "Efeitos visuais próprios de alguns golpes (SÓ visual: não muda dano, alvos nem regras). Golpe fora daqui usa o efeito genérico. tipo: estilhacos, feixe, sopro, sol_negro, garras, corte, raizes, chuva, nevasca, clarao, impacto, explosao, projetil, cristais. cores: nome de paleta (efeitos_de_golpe.PALETAS) ou lista RGB. investe: corre até o alvo e o efeito sai no golpe. partes: vários efeitos juntos (cada um com seu atraso). do_alto: o feixe desce do céu. flash: clarão na tela toda.",
+
+  "_eclipse_bispo": "-- Bispo Eclipsado / Dragão do Eclipse --",
+  "estilhacos_de_vitral": {"partes": [{"tipo": "clarao", "cores": "vitral", "raio": 50}, {"tipo": "estilhacos", "cores": "vitral", "quantidade": 24, "atraso": 0.08}]},
+  "raio_da_aurora": {"tipo": "feixe", "cores": "ouro", "grossura": 3, "flash": [255, 240, 200]},
+  "luz_cegante": {"tipo": "clarao", "cores": "ouro", "raio": 80, "flash": [255, 250, 230]},
+  "bencao_eclipsada": {"tipo": "sol_negro", "cores": "eclipse", "raio": 40},
+  "sopro_do_eclipse": {"partes": [{"tipo": "sopro", "cores": "eclipse"}, {"tipo": "sol_negro", "cores": "eclipse", "raio": 34, "atraso": 0.3}]},
+  "garras_do_eclipse": {"investe": true, "partes": [{"tipo": "garras", "cores": "eclipse"}, {"tipo": "explosao", "cores": "eclipse", "quantidade": 16, "raio": 40}]},
+
+  "_eclipse_fieis": "-- Clérigo, Anjo, Gárgula, Sombra do Herói --",
+  "luz_eclipsada": {"tipo": "feixe", "cores": "eclipse", "grossura": 2},
+  "prece_do_eclipse": {"tipo": "clarao", "cores": "roxo", "raio": 50},
+  "veu_do_eclipse": {"tipo": "nevasca", "cores": "sombra"},
+  "asas_negras": {"partes": [{"tipo": "explosao", "cores": "sombra", "quantidade": 30, "raio": 64}, {"tipo": "clarao", "cores": "roxo", "raio": 44}]},
+  "espada_maculada": {"investe": true, "tipo": "corte", "cores": "roxo", "quantidade": 2},
+  "juizo_corrompido": {"tipo": "feixe", "do_alto": true, "cores": "ouro", "grossura": 3, "flash": [255, 230, 190]},
+  "garras_de_pedra": {"investe": true, "tipo": "garras", "cores": "pedra"},
+  "mergulho_de_pedra": {"investe": true, "tipo": "impacto", "cores": "pedra", "raio": 120},
+  "lamina_sombria": {"investe": true, "tipo": "corte", "cores": "sombra", "quantidade": 2},
+
+  "_rainha": "-- Rainha de Gelo Eterno --",
+  "lanca_de_gelo_eterno": {"partes": [{"tipo": "projetil", "formato": "lanca", "cores": "gelo"}, {"tipo": "cristais", "atraso": 0.28}, {"tipo": "estilhacos", "cores": "gelo", "atraso": 0.3}]},
+  "tempestade_de_gelo": {"tipo": "nevasca", "cores": "gelo", "flash": [200, 230, 255]},
+  "toque_glacial": {"investe": true, "partes": [{"tipo": "cristais"}, {"tipo": "explosao", "cores": "gelo", "quantidade": 18, "raio": 40}]},
+
+  "_forjador": "-- Forjador Antigo --",
+  "marretada": {"investe": true, "tipo": "impacto", "cores": "lava", "raio": 100},
+  "golpe_na_bigorna": {"tipo": "impacto", "cores": "fogo", "raio": 140, "flash": [255, 180, 90]},
+  "sopro_de_lava": {"tipo": "sopro", "cores": "lava"},
+  "desgastar_armas": {"tipo": "estilhacos", "cores": [[176, 166, 156], [128, 96, 64], [210, 130, 60]], "quantidade": 14},
+  "reforjar_armadura": {"partes": [{"tipo": "impacto", "cores": "fogo", "raio": 70}, {"tipo": "clarao", "cores": "fogo", "raio": 50}]},
+
+  "_mae_raiz": "-- Mãe-Raiz --",
+  "chicote_de_raiz": {"tipo": "raizes", "cores": "raiz"},
+  "brotar_raizes": {"tipo": "raizes", "cores": "raiz"},
+  "abraco_da_terra": {"partes": [{"tipo": "raizes", "cores": "raiz"}, {"tipo": "explosao", "cores": "raiz", "quantidade": 16, "raio": 40, "atraso": 0.2}]},
+  "chuva_de_seiva": {"tipo": "chuva", "cores": "seiva"},
+  "florescer_sangrento": {"partes": [{"tipo": "clarao", "cores": "petalas", "raio": 50}, {"tipo": "explosao", "cores": "petalas", "quantidade": 28, "raio": 60}]},
+
+  "_primeiro_heroi": "-- Primeiro Herói --",
+  "juramento_antigo": {"tipo": "clarao", "cores": "ouro", "raio": 80},
+  "lamina_ancestral": {"investe": true, "tipo": "corte", "cores": "ouro", "quantidade": 2},
+  "luz_primordial": {"tipo": "feixe", "do_alto": true, "cores": "ouro", "grossura": 4, "flash": [255, 248, 220]},
+  "ultimo_golpe": {"investe": true, "partes": [{"tipo": "corte", "cores": "ouro", "quantidade": 3, "tamanho": 90}, {"tipo": "clarao", "cores": "ouro", "raio": 90}], "flash": [255, 250, 230]}
+}

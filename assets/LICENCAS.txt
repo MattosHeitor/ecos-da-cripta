@@ -1,0 +1,23 @@
+LICENÇAS DOS ARQUIVOS DA PASTA assets/
+======================================
+
+Sprites, cenários, ícones de itens, projéteis, músicas e efeitos sonoros
+(assets/sprites_macabros, assets/cenarios_macabros, assets/itens_macabros,
+assets/efeitos, assets/sons e as prévias):
+  Criados pelo próprio projeto, gerados por código (pasta ferramentas/, veja o README).
+  Nenhuma imagem nem som de terceiros foi usado.
+
+Fonte Pixelify Sans (assets/fontes/PixelifySans.ttf):
+  Copyright 2021 The Pixelify Sans Project Authors
+  (https://github.com/eifetx/Pixelify-Sans)
+  Licença: SIL Open Font License, versão 1.1 (texto completo em
+  assets/fontes/OFL_PixelifySans.txt).
+  Baixada de https://github.com/google/fonts/tree/main/ofl/pixelifysans
+  A licença permite usar, copiar e distribuir a fonte junto com o jogo.
+
+Fonte M PLUS Rounded 1c (assets/fontes/MPLUSRounded1c-Bold.ttf e MPLUSRounded1c-ExtraBold.ttf):
+  Copyright 2016 The Rounded M+ Project Authors (https://github.com/coz-m/MPLUS_FONTS)
+  Licença: SIL Open Font License, versão 1.1 (texto completo em
+  assets/fontes/OFL_MPLUSRounded1c.txt).
+  Baixada de https://github.com/google/fonts/tree/main/ofl/mplusrounded1c (2026-10-12).
+  É a fonte dos textos do jogo desde a etapa 2 (mais redonda e legível); a Pixelify Sans continua na pasta.

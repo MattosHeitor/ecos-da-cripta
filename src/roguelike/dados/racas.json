@@ -1,0 +1,83 @@
+{
+  "_comentario": "Raças (roguelike/racas.py). preco em Brasas (0 = já liberada); conquista = precisa dela para poder comprar. modificadores = bônus e penalidades fixos (os nomes do stat(): dano_causado_fogo, dano_recebido_luz, furtividade, xp_ganho...). imunidades = status que não pegam. cosmetico = camada desenhada por cima do herói (camada_<geometria>_<cosmetico>). dons = poderes especiais: passivo (passivas de passivas.py), golpe (golpe racial com recarga, fora dos espaços), loot (chance de item extra), forja (receitas exclusivas com requer_raca) e renascer.",
+
+  "humano": {
+    "nome": "Humano", "preco": 0, "cosmetico": null,
+    "descricao": "Versátil e ambicioso: aprende mais rápido que qualquer outro povo.",
+    "vantagens": ["+10% de XP", "+1 ponto de atributo a cada 2 níveis"],
+    "desvantagens": [],
+    "modificadores": {"xp_ganho": 0.1},
+    "dons": [{"tipo": "passivo", "passiva": {"tipo": "ponto_extra", "a_cada": 2, "pontos": 1, "nome": "Adaptável"}}]
+  },
+  "gnomo": {
+    "nome": "Gnomo", "preco": 90, "cosmetico": "raca_gnomo",
+    "descricao": "Pequeno, rápido e com bolsos fundos. Os inimigos quase esquecem que ele está ali.",
+    "vantagens": ["+50% de furtividade (é muito menos atacado)", "35% de chance de um item extra por combate", "+3 SOR"],
+    "desvantagens": ["-8% de vida máxima", "-1 FOR"],
+    "modificadores": {"furtividade": 0.5, "sorte": 3, "vida_percentual": -0.08, "forca": -1, "resiste_peste": -0.35},
+    "dons": [{"tipo": "loot", "chance": 0.35, "nome": "Bolsos Fundos"}]
+  },
+  "draconiano": {
+    "nome": "Draconiano", "preco": 150, "cosmetico": "raca_draconiano",
+    "descricao": "Sangue de dragão nas veias. Domina o fogo e pode assumir a forma de um dragão, mas o gelo o paralisa.",
+    "vantagens": ["Pirocinese: +25% de dano de fogo", "Golpe Metamorfose: vira dragão por 3 turnos (recarga 6)", "Imune a queimadura", "+1 CON"],
+    "desvantagens": ["+25% de dano de gelo recebido"],
+    "modificadores": {"dano_causado_fogo": 0.25, "dano_recebido_gelo": 0.25, "dano_recebido_fogo": -0.2, "constituicao": 1},
+    "imunidades": ["queimadura"],
+    "dons": [{"tipo": "golpe", "golpe": "metamorfose_draconica", "nome": "Metamorfose"}]
+  },
+  "anao_das_profundezas": {
+    "nome": "Anão", "preco": 100, "cosmetico": "raca_anao",
+    "descricao": "Barba trançada e martelo na mão. Duro como a rocha das Minas e o único que forja os itens lendários anões.",
+    "vantagens": ["+1 de defesa", "+2 CON", "Forja anã: 5 itens lendários exclusivos"],
+    "desvantagens": ["-5% de esquiva", "-1 de iniciativa"],
+    "modificadores": {"defesa": 1, "constituicao": 2, "chance_esquiva": -0.05, "iniciativa": -1, "resiste_peste": 0.25},
+    "dons": [{"tipo": "forja", "nome": "Forja Anã"}]
+  },
+  "elfo_sombrio": {
+    "nome": "Elfo Sombrio", "preco": 100, "cosmetico": "raca_elfo",
+    "descricao": "Rápido e preciso, nascido no escuro. Começa todo combate esquivo, mas é frágil.",
+    "vantagens": ["+2 DES", "+3% de crítico", "Começa o combate Evasivo (2 turnos)", "+15% de dano de sombra"],
+    "desvantagens": ["-5% de vida máxima", "+15% de dano de luz recebido"],
+    "modificadores": {"destreza": 2, "chance_critico": 0.03, "vida_percentual": -0.05, "dano_causado_sombra": 0.15,
+                      "dano_recebido_luz": 0.15},
+    "dons": [{"tipo": "passivo", "passiva": {"tipo": "status_inicial", "status": [{"status": "evasivo", "duracao": 2}],
+                                             "nome": "Passos no Escuro"}}]
+  },
+  "meio_orc": {
+    "nome": "Meio-Orc", "preco": 90, "cosmetico": "raca_orc",
+    "descricao": "Força bruta e pouca paciência para magia. Ferido, entra em fúria.",
+    "vantagens": ["+3 FOR", "Fúria: abaixo de 40% de vida fica Fortalecido e Inspirado (1x por combate)"],
+    "desvantagens": ["-2 INT", "-10% de ganho de energia"],
+    "modificadores": {"forca": 3, "inteligencia": -2, "ganho_energia": -0.1},
+    "dons": [{"tipo": "passivo", "passiva": {"tipo": "gatilho_vida_baixa", "limiar": 0.4, "nome": "Fúria",
+                                             "status": [{"status": "fortalecido", "duracao": 3}, {"status": "inspirado", "duracao": 2}]}}]
+  },
+  "revenante": {
+    "nome": "Morto-Vivo", "preco": 130, "cosmetico": "raca_morto_vivo",
+    "descricao": "Voltou do túmulo e se recusa a ficar lá. Ao cair, se ergue de novo uma vez por combate.",
+    "vantagens": ["Renasce 1x por combate com 10% da vida", "Imune a veneno e sangramento"],
+    "desvantagens": ["-50% de cura recebida", "-10% de vida máxima", "+30% de dano de luz recebido"],
+    "modificadores": {"cura_recebida": -0.5, "vida_percentual": -0.1, "dano_recebido_luz": 0.3, "resiste_peste": 0.6},
+    "imunidades": ["veneno", "sangramento"],
+    "dons": [{"tipo": "renascer", "vida": 0.1, "nome": "Recusa do Túmulo"}]
+  },
+  "hemofago": {
+    "nome": "Hemófago", "preco": 140, "conquista": "derrotou:vampiro", "cosmetico": "raca_hemofago",
+    "descricao": "Vive do sangue alheio. Quanto mais o inimigo sangra, mais ele bebe. (Derrote um Vampiro para liberar.)",
+    "vantagens": ["Rouba 8% de vida", "Rouba +5% por acúmulo de sangramento do alvo (até 50%)", "+2 FOR"],
+    "desvantagens": ["-10% de vida máxima"],
+    "modificadores": {"roubo_vida": 0.08, "vida_percentual": -0.1, "forca": 2},
+    "dons": [{"tipo": "passivo", "passiva": {"tipo": "roubo_por_sangramento", "por_acumulo": 0.05, "maximo": 0.5,
+                                             "nome": "Sede de Sangue"}}]
+  },
+  "meio_demonio": {
+    "nome": "Meio-Demônio", "preco": 140, "cosmetico": "raca_demonio",
+    "descricao": "Filho do abismo. Sua sombra corrói e amaldiçoa quem ele toca, mas a luz o queima.",
+    "vantagens": ["+25% de dano de sombra", "15% de chance de amaldiçoar quem acerta"],
+    "desvantagens": ["+30% de dano de luz recebido", "-15% de cura recebida"],
+    "modificadores": {"dano_causado_sombra": 0.25, "dano_recebido_luz": 0.3, "cura_recebida": -0.15},
+    "dons": [{"tipo": "passivo", "passiva": {"tipo": "status_ao_acertar", "chance": 0.15, "nome": "Toque do Abismo",
+                                             "status": [{"status": "amaldicoado", "duracao": 2}]}}]
+  }
+}

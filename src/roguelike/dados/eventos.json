@@ -1,0 +1,367 @@
+{
+  "_comentario": "Eventos de escolha. regioes = onde aparecem (sem a chave = em todas). requisito: ouro, item, vaga_no_grupo, caido. efeitos: ouro, item, item_aleatorio, premio, curar_grupo, dano_grupo, dano_aleatorio, xp, pontos_atributo, proximo_combate, recrutar, combate, revelar_receita, reviver_todos, sorte, teste, segredo (+1 num segredo entre runs). so_por_guia = só aparece pelas mãos de um guia (roguelike/guias.py); sprite = quem corre ao fundo da tela do evento.",
+  "_premio": "MP3: os itens de evento vão para CADA jogador, cada um com o seu sorteio (item, item_aleatorio e premio). premio = um prêmio do tamanho de uma luta (roguelike/gerador_de_loot.py, de_evento): por_jogador + por_heroi x heróis do jogador prêmios da bolsa da fase (+ 'itens': linhas a mais), cada um com chance_de_equipamento de ser uma peça (nunca abaixo de raridade_minima), e chance_de_lendario de uma peça lendária a mais. Regra de ouro: quanto mais risco a opção tem (teste, sorte, luta, maldição, vida), maior o prêmio; as opções seguras dão menos.",
+
+  "altar_esquecido": {
+    "nome": "Altar Esquecido",
+    "texto": "Entre raízes secas, um altar de pedra ainda guarda velas acesas. Ninguém as acendeu.",
+    "opcoes": [
+      {"texto": "Rezar em silêncio", "efeitos": [{"tipo": "curar_grupo", "percentual": 0.3}], "resultado": "Uma luz fraca fecha algumas feridas."},
+      {"texto": "Profanar o altar e levar as oferendas", "efeitos": [{"tipo": "ouro", "valor": 60},
+        {"tipo": "premio", "por_jogador": 1, "por_heroi": 1, "chance_de_equipamento": 0.3, "raridade_minima": "incomum"},
+        {"tipo": "proximo_combate", "status": "amaldicoado", "duracao": 3, "lado": "herois"}], "resultado": "As velas se apagam de uma vez. Você sente olhos nas costas."},
+      {"texto": "Seguir em frente", "efeitos": []}
+    ]
+  },
+  "mercador_ferido": {
+    "nome": "Mercador Ferido",
+    "texto": "Um mercador sangra encostado na carroça virada. Ele aperta uma bolsa contra o peito.",
+    "opcoes": [
+      {"texto": "Dar uma Poção de Vida", "requisito": {"item": "pocao_de_vida"}, "efeitos": [{"tipo": "perder_item", "chave": "pocao_de_vida"},
+        {"tipo": "item_aleatorio", "raridade": "raro", "item_tipo": "equipamento"},
+        {"tipo": "premio", "por_heroi": 1, "chance_de_equipamento": 0.2}], "resultado": "Agradecido, ele entrega algo que guardava para si."},
+      {"texto": "Roubar a bolsa", "efeitos": [{"tipo": "ouro", "valor": 45}, {"tipo": "premio", "por_jogador": 1, "por_heroi": 1},
+        {"tipo": "proximo_combate", "status": "enfraquecido", "duracao": 2, "lado": "herois"}], "resultado": "Ele amaldiçoa vocês com o último fôlego."},
+      {"texto": "Deixar ele lá", "efeitos": []}
+    ]
+  },
+  "bau_trancado": {
+    "nome": "Baú Trancado",
+    "texto": "Um baú de ferro, coberto de musgo, com uma fechadura complicada.",
+    "opcoes": [
+      {"texto": "Abrir a fechadura (DES)", "efeitos": [{"tipo": "teste", "atributo": "destreza", "dificuldade": 13,
+        "sucesso": [{"tipo": "item_aleatorio", "raridade": "raro"}, {"tipo": "ouro", "valor": 25},
+                    {"tipo": "premio", "por_jogador": 1, "por_heroi": 1, "chance_de_equipamento": 0.5, "raridade_minima": "raro",
+                     "chance_de_lendario": 0.08}],
+        "falha": [{"tipo": "dano_aleatorio", "percentual": 0.2}],
+        "texto_sucesso": "Clique! O baú se abre.", "texto_falha": "Uma agulha envenenada salta da fechadura."}]},
+      {"texto": "Arrombar na força (FOR)", "efeitos": [{"tipo": "teste", "atributo": "forca", "dificuldade": 14,
+        "sucesso": [{"tipo": "item_aleatorio", "raridade": "raro"},
+                    {"tipo": "premio", "por_jogador": 1, "por_heroi": 1, "chance_de_equipamento": 0.4, "raridade_minima": "raro",
+                     "chance_de_lendario": 0.05}],
+        "falha": [{"tipo": "dano_aleatorio", "percentual": 0.15}],
+        "texto_sucesso": "A tampa voa longe.", "texto_falha": "A tampa cai no seu pé."}]},
+      {"texto": "Deixar o baú", "efeitos": []}
+    ]
+  },
+  "poco_dos_desejos": {
+    "nome": "Poço dos Desejos",
+    "texto": "Moedas brilham no fundo de um poço. A água é negra e parada.",
+    "opcoes": [
+      {"texto": "Jogar 20 de ouro e fazer um pedido", "requisito": {"ouro": 20}, "efeitos": [{"tipo": "ouro", "valor": -20},
+        {"tipo": "sorte", "chance": 0.55, "sucesso": [{"tipo": "xp", "valor": 30},
+          {"tipo": "premio", "por_heroi": 1, "chance_de_equipamento": 0.3, "raridade_minima": "incomum", "chance_de_lendario": 0.05}], "falha": [],
+         "texto_sucesso": "Algo responde ao pedido. Vocês se sentem mais experientes.", "texto_falha": "Nada acontece. O poço agradece o ouro."}]},
+      {"texto": "Beber a água", "efeitos": [{"tipo": "sorte", "chance": 0.6, "sucesso": [{"tipo": "curar_grupo", "percentual": 0.25}],
+        "falha": [{"tipo": "proximo_combate", "status": "veneno", "valor": 3, "duracao": 3, "lado": "herois"}],
+        "texto_sucesso": "A água é fresca e revigorante.", "texto_falha": "Tinha algo morto lá embaixo..."}]},
+      {"texto": "Seguir em frente", "efeitos": []}
+    ]
+  },
+  "viajante_perdido": {
+    "nome": "Viajante Perdido",
+    "texto": "Um aventureiro solitário se aproxima com as mãos para cima. Ele perdeu o grupo dele para a névoa.",
+    "opcoes": [
+      {"texto": "Convidar para o grupo", "requisito": {"vaga_no_grupo": true}, "efeitos": [{"tipo": "recrutar"}], "resultado": "Um novo herói se junta a vocês."},
+      {"texto": "Dividir comida", "requisito": {"item": "pao_duro"}, "efeitos": [{"tipo": "perder_item", "chave": "pao_duro"},
+        {"tipo": "item_aleatorio", "raridade": "raro", "item_tipo": "consumivel"}, {"tipo": "xp", "valor": 15},
+        {"tipo": "premio", "por_heroi": 1}], "resultado": "Ele deixa um presente antes de partir."},
+      {"texto": "Mandar ele embora", "efeitos": []}
+    ]
+  },
+  "cogumelos_brilhantes": {
+    "nome": "Cogumelos Brilhantes", "regioes": ["floresta", "minas"],
+    "texto": "Um anel de cogumelos azulados pulsa como se respirasse.",
+    "opcoes": [
+      {"texto": "Comer um", "efeitos": [{"tipo": "sorte", "chance": 0.5, "sucesso": [{"tipo": "pontos_atributo", "quantidade": 2}],
+        "falha": [{"tipo": "dano_grupo", "percentual": 0.15}],
+        "texto_sucesso": "Visões estranhas... e uma mente mais afiada.", "texto_falha": "Todo mundo passa mal."}]},
+      {"texto": "Colher com cuidado", "efeitos": [{"tipo": "item", "chave": "cogumelo_luminoso", "quantidade": 2}]},
+      {"texto": "Não tocar", "efeitos": []}
+    ]
+  },
+  "cadaver_de_aventureiro": {
+    "nome": "Cadáver de Aventureiro",
+    "texto": "Um aventureiro morto, ainda com a mochila nas costas. Marcas de garras no chão.",
+    "opcoes": [
+      {"texto": "Vasculhar a mochila", "efeitos": [{"tipo": "ouro", "valor": 25}, {"tipo": "item_aleatorio", "raridade": "comum", "item_tipo": "consumivel"},
+        {"tipo": "premio", "por_jogador": 2, "por_heroi": 1, "chance_de_equipamento": 0.2},
+        {"tipo": "sorte", "chance": 0.35, "sucesso": [{"tipo": "combate", "categoria": "combate", "estrelas": 2}], "falha": [],
+         "texto_sucesso": "O que matou ele ainda estava por perto!", "texto_falha": ""}]},
+      {"texto": "Dar um enterro digno", "efeitos": [{"tipo": "proximo_combate", "status": "fortalecido", "duracao": 3, "lado": "herois"}],
+       "resultado": "Um espírito agradecido acompanha vocês."},
+      {"texto": "Seguir", "efeitos": []}
+    ]
+  },
+  "santuario_de_sangue": {
+    "nome": "Santuário de Sangue",
+    "texto": "Uma estátua sem rosto segura uma taça vazia. Há uma inscrição: 'Dê, e receberás'.",
+    "opcoes": [
+      {"texto": "Oferecer o próprio sangue (todos perdem 15% da vida)", "efeitos": [{"tipo": "dano_grupo", "percentual": 0.15},
+        {"tipo": "item_aleatorio", "raridade": "epico", "item_tipo": "equipamento"}, {"tipo": "premio", "chance_de_lendario": 0.2}],
+        "resultado": "A taça se enche, e algo cai das mãos da estátua."},
+      {"texto": "Recusar", "efeitos": []}
+    ]
+  },
+  "fenda_do_vazio": {
+    "nome": "Fenda do Vazio", "regioes": ["catedral", "circo"],
+    "texto": "O ar se rasga no meio da nave. Do outro lado não há nada, e o nada está olhando.",
+    "opcoes": [
+      {"texto": "Atravessar a fenda", "efeitos": [{"tipo": "item", "chave": "selo_do_vazio", "quantidade": 1},
+        {"tipo": "premio", "chance_de_lendario": 0.15},
+        {"tipo": "combate", "categoria": "elite", "estrelas": 5}], "resultado": "Criaturas deformadas do Vazio atacam!"},
+      {"texto": "Selar com uma prece (FÉ)", "efeitos": [{"tipo": "teste", "atributo": "fe", "dificuldade": 15,
+        "sucesso": [{"tipo": "xp", "valor": 40}, {"tipo": "revelar_receita"}], "falha": [{"tipo": "dano_grupo", "percentual": 0.2}],
+        "texto_sucesso": "A fenda se fecha com um suspiro.", "texto_falha": "O Vazio cospe de volta a sua prece."}]},
+      {"texto": "Afastar-se", "efeitos": []}
+    ]
+  },
+  "biblioteca_arruinada": {
+    "nome": "Biblioteca Arruinada", "regioes": ["catedral"],
+    "texto": "Estantes caídas e livros mofados. Alguns ainda falam baixinho.",
+    "opcoes": [
+      {"texto": "Estudar os tomos", "efeitos": [{"tipo": "xp", "valor": 35}], "resultado": "Vocês aprendem segredos de batalha."},
+      {"texto": "Procurar receitas", "efeitos": [{"tipo": "revelar_receita"}]},
+      {"texto": "Queimar os livros e levar a cera", "efeitos": [{"tipo": "item", "chave": "cera_negra", "quantidade": 3}]}
+    ]
+  },
+  "cartomante": {
+    "nome": "Cartomante",
+    "texto": "Uma velha embaralha cartas sobre um caixão. 'Quer saber o seu destino, viajante?'",
+    "opcoes": [
+      {"texto": "Pagar 30 de ouro", "requisito": {"ouro": 30}, "efeitos": [{"tipo": "ouro", "valor": -30},
+        {"tipo": "sorte", "chance": 0.5, "sucesso": [{"tipo": "revelar_receita"}, {"tipo": "item_aleatorio", "raridade": "raro"},
+          {"tipo": "premio", "por_heroi": 1, "chance_de_equipamento": 0.5, "raridade_minima": "raro", "chance_de_lendario": 0.08}],
+         "falha": [{"tipo": "item_aleatorio", "raridade": "raro"}, {"tipo": "premio", "por_heroi": 1}],
+         "texto_sucesso": "A Torre. Ela sorri e revela um segredo.", "texto_falha": "A Roda da Fortuna."}]},
+      {"texto": "Pedir uma leitura de graça", "efeitos": [{"tipo": "sorte", "chance": 0.5,
+        "sucesso": [{"tipo": "proximo_combate", "status": "inspirado", "duracao": 3, "lado": "herois"}],
+        "falha": [{"tipo": "proximo_combate", "status": "amaldicoado", "duracao": 2, "lado": "herois"}],
+        "texto_sucesso": "O Sol. Bons presságios.", "texto_falha": "A Morte. Ela não diz mais nada."}]},
+      {"texto": "Recusar", "efeitos": []}
+    ]
+  },
+  "lago_negro": {
+    "nome": "Lago Negro",
+    "texto": "Um lago imóvel reflete um céu que não é este.",
+    "opcoes": [
+      {"texto": "Banhar-se", "efeitos": [{"tipo": "curar_grupo", "percentual": 0.25}]},
+      {"texto": "Pescar", "efeitos": [{"tipo": "sorte", "chance": 0.55, "sucesso": [{"tipo": "item_aleatorio", "raridade": "raro"},
+        {"tipo": "premio", "por_jogador": 1, "por_heroi": 1, "chance_de_equipamento": 0.4, "raridade_minima": "raro",
+         "chance_de_lendario": 0.08}],
+        "falha": [{"tipo": "combate", "categoria": "combate", "estrelas": 2}],
+        "texto_sucesso": "Algo brilhante vem no anzol.", "texto_falha": "Algo puxa de volta... e sai da água!"}]},
+      {"texto": "Seguir", "efeitos": []}
+    ]
+  },
+  "armadilha_antiga": {
+    "nome": "Armadilha Antiga",
+    "texto": "Placas de pressão e lâminas enferrujadas bloqueiam o caminho.",
+    "opcoes": [
+      {"texto": "Desarmar (DES)", "efeitos": [{"tipo": "teste", "atributo": "destreza", "dificuldade": 13,
+        "sucesso": [{"tipo": "item_aleatorio", "raridade": "raro", "item_tipo": "material"}, {"tipo": "xp", "valor": 15},
+                    {"tipo": "premio", "por_heroi": 1, "chance_de_equipamento": 0.2}],
+        "falha": [{"tipo": "dano_aleatorio", "percentual": 0.25}],
+        "texto_sucesso": "As peças da armadilha valem alguma coisa.", "texto_falha": "Uma lâmina corta fundo."}]},
+      {"texto": "Dar a volta", "efeitos": [{"tipo": "proximo_combate", "status": "lento", "duracao": 1, "lado": "herois"}], "resultado": "O desvio cansa o grupo."}
+    ]
+  },
+  "estatua_do_heroi": {
+    "nome": "Estátua do Herói",
+    "texto": "A estátua de um herói antigo, com uma espada de verdade nas mãos de pedra.",
+    "opcoes": [
+      {"texto": "Rezar ao herói", "efeitos": [{"tipo": "proximo_combate", "status": "fortalecido", "duracao": 3, "lado": "herois"},
+        {"tipo": "proximo_combate", "status": "protegido", "duracao": 3, "lado": "herois"}]},
+      {"texto": "Pegar a espada", "efeitos": [{"tipo": "item", "chave": "espada_enferrujada", "quantidade": 1},
+        {"tipo": "premio", "por_heroi": 1, "chance_de_equipamento": 0.4, "raridade_minima": "raro"},
+        {"tipo": "proximo_combate", "status": "amaldicoado", "duracao": 2, "lado": "herois"}],
+       "resultado": "A espada sai da pedra fácil demais. Na base da estátua, oferendas esquecidas."},
+      {"texto": "Seguir", "efeitos": []}
+    ]
+  },
+  "caravana_saqueada": {
+    "nome": "Caravana Saqueada",
+    "texto": "Carroças queimadas e caixas abertas. As pegadas dos saqueadores ainda estão frescas.",
+    "opcoes": [
+      {"texto": "Vasculhar os destroços", "efeitos": [{"tipo": "item_aleatorio", "raridade": "comum", "item_tipo": "material", "quantidade": 3},
+        {"tipo": "premio", "por_jogador": 1, "por_heroi": 1}, {"tipo": "ouro", "valor": 15}]},
+      {"texto": "Seguir as pegadas", "efeitos": [{"tipo": "ouro", "valor": 50}, {"tipo": "combate", "categoria": "combate", "estrelas": 3}],
+       "resultado": "Vocês alcançam os saqueadores!"},
+      {"texto": "Ignorar", "efeitos": []}
+    ]
+  },
+  "acampamento_abandonado": {
+    "nome": "Acampamento Abandonado",
+    "texto": "Uma fogueira ainda morna e sacos de dormir rasgados.",
+    "opcoes": [
+      {"texto": "Descansar um pouco", "efeitos": [{"tipo": "curar_grupo", "percentual": 0.2}]},
+      {"texto": "Revirar os suprimentos", "efeitos": [{"tipo": "item_aleatorio", "raridade": "comum", "item_tipo": "consumivel", "quantidade": 2},
+        {"tipo": "premio", "por_heroi": 1}]}
+    ]
+  },
+  "tumulo_selado": {
+    "nome": "Túmulo Selado", "regioes": ["catedral"],
+    "texto": "Um túmulo com o selo de uma ordem de cavaleiros. Algo arranha a tampa por dentro.",
+    "opcoes": [
+      {"texto": "Abrir o túmulo", "efeitos": [{"tipo": "sorte", "chance": 0.5,
+        "sucesso": [{"tipo": "reviver_todos", "percentual": 0.4}, {"tipo": "item_aleatorio", "raridade": "raro", "item_tipo": "equipamento"},
+                    {"tipo": "premio", "por_jogador": 1, "por_heroi": 1, "chance_de_equipamento": 0.4, "raridade_minima": "raro",
+                     "chance_de_lendario": 0.15}],
+        "falha": [{"tipo": "combate", "inimigos": ["esqueleto_cavaleiro", "esqueleto"], "estrelas": 4}],
+        "texto_sucesso": "Um espírito bondoso desperta e abençoa o grupo.", "texto_falha": "O cavaleiro morto se levanta furioso!"}]},
+      {"texto": "Reforçar o selo", "efeitos": [{"tipo": "xp", "valor": 20}]}
+    ]
+  },
+  "carrossel_enferrujado": {
+    "nome": "Carrossel Enferrujado", "regioes": ["circo"],
+    "texto": "Os cavalinhos têm dentes. A música começa sozinha quando vocês chegam perto.",
+    "opcoes": [
+      {"texto": "Dar uma volta", "efeitos": [{"tipo": "sorte", "chance": 0.5, "sucesso": [{"tipo": "xp", "valor": 60}],
+        "falha": [{"tipo": "dano_grupo", "percentual": 0.2}], "texto_sucesso": "Que viagem! Vocês voltam mais sábios.", "texto_falha": "Os cavalinhos mordem."}]},
+      {"texto": "Desmontar as engrenagens", "efeitos": [{"tipo": "item", "chave": "mola_enferrujada", "quantidade": 3},
+        {"tipo": "premio", "por_heroi": 1}]}
+    ]
+  },
+
+  "_rato_branco": "Reino dos Ratos, etapa 1 (docs/planos/reino_dos_ratos.md): os passos do guia Rato Branco (regioes.json 'guias'). so_por_guia = nunca caem no sorteio comum de eventos; só aparecem quando o Rato Branco surge no mapa das fases subterrâneas. 'segredo' soma 1 ao segredo, que fica no progresso (vale para todas as runs). sprite = quem corre ao fundo da tela.",
+  "rato_branco_esconderijo": {
+    "nome": "O Rato Branco", "so_por_guia": true, "sprite": "rato_branco",
+    "texto": "No canto do olho, algo pálido se mexe. Um rato branco como osso lavado, de olhos vermelhos, para no meio do caminho e encara vocês. Não foge. Espera. Depois some por uma fenda na parede, devagar, como quem quer ser seguido.",
+    "opcoes": [
+      {"texto": "Seguir o rato pela fenda", "efeitos": [{"tipo": "segredo", "chave": "rato_branco"},
+        {"tipo": "item", "chave": "queijo_mofado", "quantidade": 2}, {"tipo": "item_aleatorio", "raridade": "comum", "item_tipo": "consumivel"},
+        {"tipo": "ouro", "valor": 20}],
+        "resultado": "A fenda dá num esconderijo apertado, forrado de trapos e cascas de pão. Alguém guarda tesouros aqui: moedas, um frasco e queijo, muito queijo. O rato branco observa do alto de uma pilha de moedas. Quando vocês olham de novo, ele já sumiu."},
+      {"texto": "Deixar o rato em paz", "efeitos": [],
+        "resultado": "O rato branco some no escuro. Por um instante, vocês têm a impressão de que ele ficou decepcionado."}
+    ]
+  },
+  "rato_branco_bueiro": {
+    "nome": "O Rato Branco Voltou", "so_por_guia": true, "sprite": "rato_branco",
+    "texto": "Ele está de volta. O mesmo rato branco, os mesmos olhos vermelhos, mas desta vez não está sozinho: dezenas de olhinhos brilham atrás dele, no escuro. Ele corre alguns passos, para e olha para trás, como quem chama.",
+    "opcoes": [
+      {"texto": "Segui-lo até o fim", "efeitos": [{"tipo": "segredo", "chave": "rato_branco",
+        "texto": "Passagem secreta descoberta: o Bueiro Escondido leva ao Reino dos Ratos."},
+        {"tipo": "item", "chave": "queijo_mofado", "quantidade": 1}],
+        "resultado": "O caminho desce, desce e continua descendo. No fundo de um poço de pedra, quase engolida pelo lodo, há uma grade de ferro: um bueiro antigo. Do outro lado vêm guinchos, música desafinada e cheiro de queijo podre. O rato branco passa entre as barras e olha para vocês uma última vez. Agora vocês sabem o caminho."},
+      {"texto": "Não confiar nele", "efeitos": [],
+        "resultado": "Vocês recuam. Os olhinhos no escuro se apagam, um por um."}
+    ]
+  },
+
+  "_reino_dos_ratos": "Reino dos Ratos, etapa 4A: eventos de dentro do Reino. zonas = só nas zonas com esses nomes (regioes.json); parado = o sprite fica no lugar do '?' (não corre ao pé da tela). Consequências novas: peste, reforcos_proximo_combate, trocar_consumivel, ate_o_chefe, ajuste_do_chefe (roguelike/eventos_run.py).",
+  "mercado_do_rato_mercador": {
+    "nome": "Mercado Roedor", "regioes": ["reino_dos_ratos"], "zonas": ["Mercado Roedor"], "sprite": "rato_mercador", "parado": true,
+    "texto": "Entre barracas de trapos e velas em crânios, um rato gordo de colete puído pesa bugigangas numa balança torta. Ele guincha um preço que vocês não entendem, mas fareja o queijo nos seus bolsos.",
+    "opcoes": [
+      {"texto": "Trocar 2 Queijos Mofados por um tesouro", "requisito": {"item": "queijo_mofado", "quantidade": 2},
+        "efeitos": [{"tipo": "perder_item", "chave": "queijo_mofado", "quantidade": 2}, {"tipo": "item_aleatorio", "raridade": "raro"},
+          {"tipo": "premio", "por_heroi": 1, "chance_de_equipamento": 0.3, "raridade_minima": "raro"}],
+        "resultado": "Ele morde cada queijo para conferir e, satisfeito, empurra um embrulho pesado para vocês."},
+      {"texto": "Trocar um consumível qualquer", "requisito": {"consumivel": true},
+        "efeitos": [{"tipo": "trocar_consumivel", "raridade": "incomum"}],
+        "resultado": "Ele cheira, sacode e aceita. Em troca, tira alguma coisa do fundo da mochila."},
+      {"texto": "Roubar a barraca (DES)", "efeitos": [{"tipo": "teste", "atributo": "destreza", "dificuldade": 14,
+        "sucesso": [{"tipo": "item_aleatorio", "raridade": "raro"}, {"tipo": "ouro", "valor": 30},
+                    {"tipo": "premio", "por_jogador": 1, "por_heroi": 1, "chance_de_equipamento": 0.4, "raridade_minima": "raro",
+                     "chance_de_lendario": 0.1},
+                    {"tipo": "reforcos_proximo_combate", "inimigos": ["rato_guarda_real", "rato_guarda_real"],
+                     "texto": "Um guincho de alarme corre o mercado: a Guarda Real vem atrás de vocês na próxima luta."}],
+        "falha": [{"tipo": "combate", "inimigos": ["rato_guarda_real", "rato_guarda_real", "rato_ladrao"], "estrelas": 3}],
+        "texto_sucesso": "Vocês somem entre as barracas com os bolsos cheios.",
+        "texto_falha": "O mercador guincha alto. A Guarda Real fecha o caminho!"}]},
+      {"texto": "Seguir caminho", "efeitos": []}
+    ]
+  },
+  "prisioneiro_na_gaiola": {
+    "nome": "Prisioneiro na Gaiola", "regioes": ["reino_dos_ratos"], "zonas": ["Galerias Fétidas", "Mercado Roedor"],
+    "sprite": "prisioneiro_na_gaiola", "parado": true,
+    "texto": "Pendurada num cano, uma gaiola de ferro range. Dentro, um homem magro implora baixinho: \"Me tirem daqui... eles voltam à noite.\" A pele dele se mexe de vez em quando. Ou é a luz?",
+    "opcoes": [
+      {"texto": "Abrir a gaiola", "efeitos": [{"tipo": "sorte", "chance": 0.55,
+        "sucesso": [{"tipo": "item_aleatorio", "raridade": "raro"}, {"tipo": "xp", "valor": 25},
+                    {"tipo": "premio", "por_heroi": 1, "chance_de_equipamento": 0.3, "raridade_minima": "raro"}],
+        "falha": [{"tipo": "combate", "inimigos": ["homem_bubonico"], "estrelas": 3}],
+        "texto_sucesso": "Era só um coitado. Ele chora de alívio e entrega o que conseguiu esconder dos ratos.",
+        "texto_falha": "Ele sorri com dentes demais. A pele estoura em calombos: era um bubônico!"}]},
+      {"texto": "Examinar antes de abrir (INT)", "efeitos": [{"tipo": "teste", "atributo": "inteligencia", "dificuldade": 13,
+        "sucesso": [{"tipo": "sorte", "chance": 0.55,
+          "sucesso": [{"tipo": "item_aleatorio", "raridade": "raro"}, {"tipo": "xp", "valor": 25}],
+          "falha": [{"tipo": "xp", "valor": 40}],
+          "texto_sucesso": "As feridas são de corrente, não de peste. Vocês o soltam em segurança, e ele agradece com o que tem.",
+          "texto_falha": "Vocês veem os ratos se mexendo debaixo da pele. A gaiola fica fechada, e ele grita até vocês sumirem."}],
+        "falha": [{"tipo": "sorte", "chance": 0.55,
+          "sucesso": [{"tipo": "item_aleatorio", "raridade": "raro"}, {"tipo": "xp", "valor": 25}],
+          "falha": [{"tipo": "combate", "inimigos": ["homem_bubonico"], "estrelas": 3}],
+          "texto_sucesso": "Na dúvida, vocês abrem. Por sorte, era só um coitado: ele agradece com o que tem.",
+          "texto_falha": "Na dúvida, vocês abrem. A pele dele estoura em calombos: era um bubônico!"}],
+        "texto_sucesso": "Vocês olham de perto, sem pressa.", "texto_falha": "Está escuro demais para ter certeza."}]},
+      {"texto": "Seguir caminho", "efeitos": [], "resultado": "Os pedidos de ajuda viram guinchos às suas costas."}
+    ]
+  },
+  "banquete_do_rei": {
+    "nome": "Banquete do Rei", "regioes": ["reino_dos_ratos"], "zonas": ["Catedral Roída"],
+    "texto": "Uma mesa comprida sob os vitrais quebrados: queijos inteiros, pães, carnes e um vinho escuro. Uma placa roída diz PARA O REI. Moscas dançam por cima de tudo.",
+    "opcoes": [
+      {"texto": "Comer à vontade", "efeitos": [{"tipo": "curar_grupo", "percentual": 0.6}, {"tipo": "peste", "niveis": 2, "chance": 0.5}],
+        "resultado": "Vocês comem como reis. Tarde demais, notam as marcas de dentes no queijo."},
+      {"texto": "Comer só o que parece limpo", "efeitos": [{"tipo": "curar_grupo", "percentual": 0.25}, {"tipo": "peste", "niveis": 1, "chance": 0.2}],
+        "resultado": "Vocês escolhem com cuidado e comem pouco."},
+      {"texto": "Encher os bolsos e sair", "efeitos": [{"tipo": "item", "chave": "queijo_mofado", "quantidade": 2},
+        {"tipo": "item", "chave": "pao_duro", "quantidade": 1}],
+        "resultado": "Ninguém vai sentir falta. Provavelmente."}
+    ]
+  },
+  "altar_do_queijo": {
+    "nome": "Altar do Queijo", "regioes": ["reino_dos_ratos"], "zonas": ["Catedral Roída"],
+    "texto": "No meio da capela afundada, um altar de ossos guarda um queijo dourado do tamanho de uma roda de carroça. Velas de sebo queimam em volta. Os ratos que passam abaixam a cabeça.",
+    "opcoes": [
+      {"texto": "Oferecer 30 de ouro", "requisito": {"ouro": 30},
+        "efeitos": [{"tipo": "ouro", "valor": -30}, {"tipo": "ate_o_chefe", "status": [{"status": "fortalecido", "duracao": 2}],
+          "texto": "Bênção do Queijo: até vencer o chefe, o grupo começa cada luta Fortalecido."}],
+        "resultado": "As velas tremem. Por um instante, os ratos olham para vocês com respeito."},
+      {"texto": "Oferecer um Queijo Mofado", "requisito": {"item": "queijo_mofado"},
+        "efeitos": [{"tipo": "perder_item", "chave": "queijo_mofado"}, {"tipo": "ate_o_chefe", "status": [{"status": "fortalecido", "duracao": 2}],
+          "texto": "Bênção do Queijo: até vencer o chefe, o grupo começa cada luta Fortalecido."}],
+        "resultado": "Queijo por queijo. Os ratos parecem achar justo."},
+      {"texto": "Roubar o queijo dourado", "efeitos": [{"tipo": "ouro", "valor": 50}, {"tipo": "item_aleatorio", "raridade": "incomum"},
+        {"tipo": "premio", "por_jogador": 1, "por_heroi": 1, "chance_de_equipamento": 0.3, "raridade_minima": "raro",
+         "chance_de_lendario": 0.1},
+        {"tipo": "ajuste_do_chefe", "modificadores": {"vida_percentual": -0.2, "dano_causado": 0.25},
+          "texto": "O chefe do Reino vai saber: estará mais fraco, mas furioso (-20% de vida, +25% de dano)."}],
+        "resultado": "Vocês rolam o queijo para longe. Lá no fundo do Reino, algo grita de raiva."},
+      {"texto": "Deixar o altar em paz", "efeitos": []}
+    ]
+  },
+  "_enxame_de_ratos": "Etapa 4B. ondas = combate em ondas (roguelike/ondas.py): uma luta atrás da outra, sem descanso; entre elas o grupo continua ou foge com o que já ganhou. sorteados = inimigos sorteados no começo (a tela mostra a próxima onda). folego = fração da vida que o grupo recupera entre as ondas. premio = consequências depois da última. textos: entre ({vencidas}, {total}, {folego}), fim, botao_premio, premio, fuga.",
+  "enxame_de_ratos_nas_galerias": {
+    "nome": "Enxame de Ratos", "regioes": ["reino_dos_ratos"], "zonas": ["Galerias Fétidas"],
+    "texto": "O chão treme. Dos canos, das grades e da água verde sai um guincho só, de mil gargantas: um enxame de ratos desce a galeria na direção de vocês. Não é um bando só. Eles vêm em ondas.",
+    "opcoes": [
+      {"texto": "Enfrentar o enxame (3 ondas)", "efeitos": [{"tipo": "ondas", "nome": "Enxame de Ratos", "folego": 0.25,
+        "ondas": [
+          {"estrelas": 2, "inimigos": ["rato_comum"], "sorteados": {"quantos": 1, "de": ["rato_da_peste", "rato_bombardeiro"]}},
+          {"estrelas": 3, "inimigos": ["rato_comum"], "sorteados": {"quantos": 1, "de": ["rato_nadador", "ratazana_gigante"]}},
+          {"estrelas": 4, "inimigos": ["enxame_de_ratos"], "sorteados": {"quantos": 1, "de": ["ratazana_gigante", "enxame_de_ratos"]}}
+        ],
+        "premio": [{"tipo": "item_aleatorio", "raridade": "raro"}, {"tipo": "ouro", "valor": 40}, {"tipo": "item", "chave": "queijo_mofado", "quantidade": 1},
+                   {"tipo": "premio", "por_jogador": 2, "por_heroi": 2, "chance_de_equipamento": 0.3, "raridade_minima": "raro",
+                    "chance_de_lendario": 0.15}],
+        "textos": {
+          "entre": "A onda {vencidas} de {total} se desfaz em guinchos, mas os canos não param de tremer. Dá só para recuperar o fôlego (+{folego}% de vida) antes da próxima.",
+          "fim": "A última onda recua e some na água verde. No fundo da galeria, de onde os ratos saíam, há um ninho enorme de trapos, ossos e coisas brilhando.",
+          "botao_premio": "Revirar o ninho",
+          "premio": "Entre ossos roídos, o que o enxame arrastou de outros viajantes.",
+          "fuga": "Vocês correm pelos canos com o que já ganharam. Os guinchos ficam para trás... por enquanto."}}],
+        "resultado": "Vocês fecham a formação. A primeira onda chega."},
+      {"texto": "Fugir pelos canos (DES)", "efeitos": [{"tipo": "teste", "atributo": "destreza", "dificuldade": 13,
+        "sucesso": [],
+        "falha": [{"tipo": "dano_grupo", "percentual": 0.15}, {"tipo": "peste", "niveis": 1, "chance": 0.5}],
+        "texto_sucesso": "Vocês se espremem por um cano lateral e o enxame passa rugindo logo abaixo.",
+        "texto_falha": "O cano é estreito demais. Os ratos alcançam os últimos da fila antes que todos passem."}]},
+      {"texto": "Jogar um Queijo Mofado e esperar", "requisito": {"item": "queijo_mofado"},
+        "efeitos": [{"tipo": "perder_item", "chave": "queijo_mofado"}],
+        "resultado": "O enxame inteiro se joga sobre o queijo e passa ao lado de vocês como um rio cinzento. Ninguém olha para trás."}
+    ]
+  }
+}

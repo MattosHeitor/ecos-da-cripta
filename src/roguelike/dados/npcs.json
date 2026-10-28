@@ -1,0 +1,48 @@
+{
+  "_comentario": "Quem aparece em cada tipo de encontro (sprite em assets/sprites_macabros) e as falas sorteadas ao chegar.",
+  "loja": {
+    "nome": "Mercador",
+    "sprite": "mercador",
+    "falas": [
+      "Tudo tem preço, viajante. Até a esperança.",
+      "Não pergunte de onde veio. Pergunte quanto custa.",
+      "Ouro na mão, mercadoria na mochila. Simples assim.",
+      "Os mortos não compram nada. Aproveite enquanto respira."
+    ]
+  },
+  "alquimista": {
+    "nome": "Alquimista",
+    "sprite": "alquimista",
+    "falas": [
+      "Cuidado com o frasco verde. Ou com o roxo. Esqueci qual.",
+      "Uma gota cura, duas matam. A dose é a arte.",
+      "Traga ingredientes estranhos e eu lhe ensino o que fazer com eles.",
+      "Cheira mal porque funciona."
+    ]
+  },
+  "treinador": {
+    "sprite": "mestre",
+    "falas": [
+      "Mostre o que aprendeu até aqui. Talvez eu lhe ensine o resto.",
+      "Força sem disciplina é só barulho.",
+      "Já treinei heróis melhores. Quase todos estão enterrados."
+    ]
+  },
+  "altar": {
+    "nome": "Altar",
+    "sprite": "altar",
+    "falas": [
+      "As velas se acendem sozinhas quando você se aproxima.",
+      "Uma voz sem boca pede uma oferenda em ouro."
+    ]
+  },
+  "necromante": {
+    "nome": "Necromante",
+    "sprite": "necromante",
+    "falas": [
+      "A morte é só uma porta. Eu tenho a chave... por um preço.",
+      "Seus amigos não precisam ficar deitados para sempre.",
+      "Não se assuste com o cheiro. Eles se acostumam."
+    ]
+  }
+}

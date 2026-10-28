@@ -1,0 +1,612 @@
+{
+  "_comentario": "Árvore de talentos de cada classe (Espelho). pos = [coluna, linha] na tela. requer = algum desses nós precisa ter pelo menos 1 ponto (nós desbloqueiam vizinhos). custo = pontos por nível do nó; maximo = níveis. efeito: atributos, bonus (modificadores), nivel_habilidade (+1 no nível inicial da habilidade, até o Tier 5), passiva.",
+
+  "guerreiro": {
+    "raiz": {"nome": "Juramento do Aço", "pos": [2, 0], "custo": 1, "maximo": 1, "efeito": {"tipo": "atributos", "atributos": {"forca": 1, "constituicao": 1}}},
+    "a1": {"nome": "Músculos de Ferro", "pos": [0, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "atributos", "atributos": {"forca": 1}}},
+    "a2": {"nome": "Couraça Viva", "pos": [0, 2], "custo": 2, "maximo": 3, "requer": ["a1"], "efeito": {"tipo": "bonus", "modificadores": {"vida_maxima": 4}}},
+    "a3": {"nome": "Inabalável", "pos": [0, 3], "custo": 3, "maximo": 2, "requer": ["a2"], "efeito": {"tipo": "bonus", "modificadores": {"chance_bloqueio": 0.04}}},
+    "b1": {"nome": "Mestre da Espada", "pos": [2, 1], "custo": 1, "maximo": 4, "requer": ["raiz"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "golpe"}},
+    "b2": {"nome": "Escudo Pesado", "pos": [2, 2], "custo": 2, "maximo": 2, "requer": ["b1"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "golpe_de_escudo"}},
+    "b3": {"nome": "Turbilhão", "pos": [2, 3], "custo": 3, "maximo": 2, "requer": ["b2"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "redemoinho"}},
+    "c1": {"nome": "Postura", "pos": [4, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "bonus", "modificadores": {"reducao_bloqueio": 0.04}}},
+    "c2": {"nome": "Vigor de Batalha", "pos": [4, 2], "custo": 2, "maximo": 3, "requer": ["c1"], "efeito": {"tipo": "bonus", "modificadores": {"cura_recebida": 0.05}}},
+    "c3": {"nome": "Último de Pé", "pos": [4, 3], "custo": 4, "maximo": 1, "requer": ["c2"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "sobreviver", "vida": 1, "nome": "Último de Pé"}}},
+    "x1": {"nome": "Muralha Viva", "pos": [1, 4], "custo": 5, "maximo": 1, "requer": ["a3", "b3"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "status_inicial", "status": [{"status": "escudo", "valor": 8}], "nome": "Muralha Viva"}}},
+    "x2": {"nome": "Fúria do Veterano", "pos": [3, 4], "custo": 5, "maximo": 1, "requer": ["b3", "c3"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "vida_baixa", "limiar": 0.4, "modificadores": {"dano_causado": 0.25}, "nome": "Fúria do Veterano"}}}
+  },
+
+  "ladino": {
+    "raiz": {"nome": "Passos Leves", "pos": [2, 0], "custo": 1, "maximo": 1, "efeito": {"tipo": "atributos", "atributos": {"destreza": 1, "sorte": 1}}},
+    "a1": {"nome": "Dedos Rápidos", "pos": [0, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "atributos", "atributos": {"destreza": 1}}},
+    "a2": {"nome": "Sorte do Diabo", "pos": [0, 2], "custo": 2, "maximo": 3, "requer": ["a1"], "efeito": {"tipo": "bonus", "modificadores": {"chance_critico": 0.02}}},
+    "a3": {"nome": "Sombra", "pos": [0, 3], "custo": 3, "maximo": 2, "requer": ["a2"], "efeito": {"tipo": "bonus", "modificadores": {"chance_esquiva": 0.03}}},
+    "b1": {"nome": "Adaga Treinada", "pos": [2, 1], "custo": 1, "maximo": 4, "requer": ["raiz"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "punhalada"}},
+    "b2": {"nome": "Corte Profundo", "pos": [2, 2], "custo": 2, "maximo": 2, "requer": ["b1"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "corte_hemorragico"}},
+    "b3": {"nome": "Golpe Sujo", "pos": [2, 3], "custo": 3, "maximo": 2, "requer": ["b2"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "golpe_baixo"}},
+    "c1": {"nome": "Lâmina Afiada", "pos": [4, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "bonus", "modificadores": {"dano_critico": 0.08}}},
+    "c2": {"nome": "Reflexos", "pos": [4, 2], "custo": 2, "maximo": 3, "requer": ["c1"], "efeito": {"tipo": "bonus", "modificadores": {"iniciativa": 1}}},
+    "c3": {"nome": "Primeiro Sangue", "pos": [4, 3], "custo": 4, "maximo": 1, "requer": ["c2"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "status_inicial", "status": [{"status": "furtivo", "duracao": 1}], "nome": "Primeiro Sangue"}}},
+    "x1": {"nome": "Hemorragia", "pos": [1, 4], "custo": 5, "maximo": 1, "requer": ["a3", "b3"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "roubo_por_sangramento", "por_acumulo": 0.03, "maximo": 0.3, "nome": "Hemorragia"}}},
+    "x2": {"nome": "Golpe Fatal", "pos": [3, 4], "custo": 5, "maximo": 1, "requer": ["b3", "c3"], "efeito": {"tipo": "bonus", "modificadores": {"chance_critico": 0.06, "dano_critico": 0.2}}}
+  },
+
+  "mago": {
+    "raiz": {"nome": "Grimório", "pos": [2, 0], "custo": 1, "maximo": 1, "efeito": {"tipo": "atributos", "atributos": {"inteligencia": 1, "sorte": 1}}},
+    "a1": {"nome": "Mente Aguçada", "pos": [0, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "atributos", "atributos": {"inteligencia": 1}}},
+    "a2": {"nome": "Pele Arcana", "pos": [0, 2], "custo": 2, "maximo": 3, "requer": ["a1"], "efeito": {"tipo": "bonus", "modificadores": {"vida_maxima": 3}}},
+    "a3": {"nome": "Fluxo de Mana", "pos": [0, 3], "custo": 3, "maximo": 2, "requer": ["a2"], "efeito": {"tipo": "bonus", "modificadores": {"ganho_energia": 0.08}}},
+    "b1": {"nome": "Mísseis Treinados", "pos": [2, 1], "custo": 1, "maximo": 4, "requer": ["raiz"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "misseis_arcanos"}},
+    "b2": {"nome": "Barreira Firme", "pos": [2, 2], "custo": 2, "maximo": 2, "requer": ["b1"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "barreira_arcana"}},
+    "b3": {"nome": "Cajado Antigo", "pos": [2, 3], "custo": 3, "maximo": 2, "requer": ["b2"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "cajado"}},
+    "c1": {"nome": "Foco", "pos": [4, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "bonus", "modificadores": {"chance_critico": 0.02}}},
+    "c2": {"nome": "Sobrecarga", "pos": [4, 2], "custo": 2, "maximo": 3, "requer": ["c1"], "efeito": {"tipo": "bonus", "modificadores": {"dano_causado": 0.04}}},
+    "c3": {"nome": "Reserva", "pos": [4, 3], "custo": 4, "maximo": 1, "requer": ["c2"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "energia_inicial", "quantidade": 1, "nome": "Reserva"}}},
+    "x1": {"nome": "Escudo Reflexivo", "pos": [1, 4], "custo": 5, "maximo": 1, "requer": ["a3", "b3"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "status_inicial", "status": [{"status": "escudo", "valor": 10}], "nome": "Escudo Reflexivo"}}},
+    "x2": {"nome": "Arquimago", "pos": [3, 4], "custo": 5, "maximo": 1, "requer": ["b3", "c3"], "efeito": {"tipo": "bonus", "modificadores": {"ganho_energia": 0.2, "dano_critico": 0.2}}}
+  },
+
+  "sacerdote": {
+    "raiz": {"nome": "Voto", "pos": [2, 0], "custo": 1, "maximo": 1, "efeito": {"tipo": "atributos", "atributos": {"fe": 1, "constituicao": 1}}},
+    "a1": {"nome": "Devoção", "pos": [0, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "atributos", "atributos": {"fe": 1}}},
+    "a2": {"nome": "Corpo Consagrado", "pos": [0, 2], "custo": 2, "maximo": 3, "requer": ["a1"], "efeito": {"tipo": "atributos", "atributos": {"constituicao": 1}}},
+    "a3": {"nome": "Égide", "pos": [0, 3], "custo": 3, "maximo": 2, "requer": ["a2"], "efeito": {"tipo": "bonus", "modificadores": {"chance_bloqueio": 0.04}}},
+    "b1": {"nome": "Mãos que Curam", "pos": [2, 1], "custo": 1, "maximo": 4, "requer": ["raiz"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "cura_sagrada"}},
+    "b2": {"nome": "Bênção Maior", "pos": [2, 2], "custo": 2, "maximo": 2, "requer": ["b1"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "bencao"}},
+    "b3": {"nome": "Luz Intensa", "pos": [2, 3], "custo": 3, "maximo": 2, "requer": ["b2"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "luz_purificadora"}},
+    "c1": {"nome": "Mãos de Luz", "pos": [4, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "bonus", "modificadores": {"cura_causada": 0.05}}},
+    "c2": {"nome": "Graça", "pos": [4, 2], "custo": 2, "maximo": 3, "requer": ["c1"], "efeito": {"tipo": "bonus", "modificadores": {"potencia_suporte": 0.05}}},
+    "c3": {"nome": "Milagre", "pos": [4, 3], "custo": 4, "maximo": 1, "requer": ["c2"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "gatilho_vida_baixa", "limiar": 0.35, "status": [{"status": "regeneracao", "valor": 5, "duracao": 3}], "nome": "Milagre"}}},
+    "x1": {"nome": "Santuário", "pos": [1, 4], "custo": 5, "maximo": 1, "requer": ["a3", "b3"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "status_inicial", "status": [{"status": "protegido", "duracao": 2}], "nome": "Santuário"}}},
+    "x2": {"nome": "Luz Eterna", "pos": [3, 4], "custo": 5, "maximo": 1, "requer": ["b3", "c3"], "efeito": {"tipo": "bonus", "modificadores": {"cura_causada": 0.2, "ganho_energia": 0.1}}}
+  },
+
+  "barbaro": {
+    "raiz": {"nome": "Sangue Selvagem", "pos": [2, 0], "custo": 1, "maximo": 1, "efeito": {"tipo": "atributos", "atributos": {"forca": 1, "destreza": 1}}},
+    "a1": {"nome": "Braços de Touro", "pos": [0, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "atributos", "atributos": {"forca": 1}}},
+    "a2": {"nome": "Couro Duro", "pos": [0, 2], "custo": 2, "maximo": 3, "requer": ["a1"], "efeito": {"tipo": "bonus", "modificadores": {"vida_maxima": 4}}},
+    "a3": {"nome": "Instinto", "pos": [0, 3], "custo": 3, "maximo": 2, "requer": ["a2"], "efeito": {"tipo": "bonus", "modificadores": {"chance_esquiva": 0.03}}},
+    "b1": {"nome": "Punhos Rápidos", "pos": [2, 1], "custo": 1, "maximo": 4, "requer": ["raiz"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "golpes_rapidos"}},
+    "b2": {"nome": "Rajada Furiosa", "pos": [2, 2], "custo": 2, "maximo": 2, "requer": ["b1"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "rajada_selvagem"}},
+    "b3": {"nome": "Giro Mortal", "pos": [2, 3], "custo": 3, "maximo": 2, "requer": ["b2"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "giro_brutal"}},
+    "c1": {"nome": "Brutalidade", "pos": [4, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "bonus", "modificadores": {"dano_critico": 0.08}}},
+    "c2": {"nome": "Fôlego", "pos": [4, 2], "custo": 2, "maximo": 3, "requer": ["c1"], "efeito": {"tipo": "bonus", "modificadores": {"cura_recebida": 0.05}}},
+    "c3": {"nome": "Adrenalina", "pos": [4, 3], "custo": 4, "maximo": 1, "requer": ["c2"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "gatilho_vida_baixa", "limiar": 0.35, "status": [{"status": "fortalecido", "duracao": 3}], "nome": "Adrenalina"}}},
+    "x1": {"nome": "Pele de Pedra", "pos": [1, 4], "custo": 5, "maximo": 1, "requer": ["a3", "b3"], "efeito": {"tipo": "bonus", "modificadores": {"defesa": 1, "vida_maxima": 6}}},
+    "x2": {"nome": "Tempestade de Golpes", "pos": [3, 4], "custo": 5, "maximo": 1, "requer": ["b3", "c3"], "efeito": {"tipo": "bonus", "modificadores": {"dano_causado": 0.12}}}
+  },
+
+  "patrulheira": {
+    "raiz": {"nome": "Olhos de Falcão", "pos": [2, 0], "custo": 1, "maximo": 1, "efeito": {"tipo": "atributos", "atributos": {"destreza": 1, "inteligencia": 1}}},
+    "a1": {"nome": "Mira", "pos": [0, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "atributos", "atributos": {"destreza": 1}}},
+    "a2": {"nome": "Astúcia", "pos": [0, 2], "custo": 2, "maximo": 3, "requer": ["a1"], "efeito": {"tipo": "atributos", "atributos": {"inteligencia": 1}}},
+    "a3": {"nome": "Camuflagem", "pos": [0, 3], "custo": 3, "maximo": 2, "requer": ["a2"], "efeito": {"tipo": "bonus", "modificadores": {"chance_esquiva": 0.03}}},
+    "b1": {"nome": "Arco Treinado", "pos": [2, 1], "custo": 1, "maximo": 4, "requer": ["raiz"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "flecha"}},
+    "b2": {"nome": "Veneno Destilado", "pos": [2, 2], "custo": 2, "maximo": 2, "requer": ["b1"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "flecha_venenosa"}},
+    "b3": {"nome": "Céu de Flechas", "pos": [2, 3], "custo": 3, "maximo": 2, "requer": ["b2"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "chuva_de_flechas"}},
+    "c1": {"nome": "Ponta Afiada", "pos": [4, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "bonus", "modificadores": {"chance_critico": 0.02}}},
+    "c2": {"nome": "Venenos Fortes", "pos": [4, 2], "custo": 2, "maximo": 3, "requer": ["c1"], "efeito": {"tipo": "bonus", "modificadores": {"potencia_suporte": 0.05}}},
+    "c3": {"nome": "Emboscada", "pos": [4, 3], "custo": 4, "maximo": 1, "requer": ["c2"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "energia_inicial", "quantidade": 1, "nome": "Emboscada"}}},
+    "x1": {"nome": "Caçadora Paciente", "pos": [1, 4], "custo": 5, "maximo": 1, "requer": ["a3", "b3"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "status_inicial", "status": [{"status": "inspirado", "duracao": 2}], "nome": "Caçadora Paciente"}}},
+    "x2": {"nome": "Chuva Mortal", "pos": [3, 4], "custo": 5, "maximo": 1, "requer": ["b3", "c3"], "efeito": {"tipo": "bonus", "modificadores": {"dano_causado": 0.1, "chance_critico": 0.04}}}
+  },
+
+  "bardo": {
+    "raiz": {"nome": "Primeira Canção", "pos": [2, 0], "custo": 1, "maximo": 1, "efeito": {"tipo": "atributos", "atributos": {"carisma": 1, "inteligencia": 1}}},
+    "a1": {"nome": "Voz", "pos": [0, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "atributos", "atributos": {"carisma": 1}}},
+    "a2": {"nome": "Presença", "pos": [0, 2], "custo": 2, "maximo": 3, "requer": ["a1"], "efeito": {"tipo": "atributos", "atributos": {"constituicao": 1}}},
+    "a3": {"nome": "Passo de Dança", "pos": [0, 3], "custo": 3, "maximo": 2, "requer": ["a2"], "efeito": {"tipo": "bonus", "modificadores": {"chance_esquiva": 0.03}}},
+    "b1": {"nome": "Cordas Afinadas", "pos": [2, 1], "custo": 1, "maximo": 4, "requer": ["raiz"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "acorde_cortante"}},
+    "b2": {"nome": "Coro de Guerra", "pos": [2, 2], "custo": 2, "maximo": 2, "requer": ["b1"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "cancao_de_coragem"}},
+    "b3": {"nome": "Balada Antiga", "pos": [2, 3], "custo": 3, "maximo": 2, "requer": ["b2"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "balada_restauradora"}},
+    "c1": {"nome": "Harmonia", "pos": [4, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "bonus", "modificadores": {"potencia_suporte": 0.05}}},
+    "c2": {"nome": "Ritmo", "pos": [4, 2], "custo": 2, "maximo": 3, "requer": ["c1"], "efeito": {"tipo": "bonus", "modificadores": {"ganho_energia": 0.05}}},
+    "c3": {"nome": "Abertura", "pos": [4, 3], "custo": 4, "maximo": 1, "requer": ["c2"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "energia_inicial", "quantidade": 1, "nome": "Abertura"}}},
+    "x1": {"nome": "Bis", "pos": [1, 4], "custo": 5, "maximo": 1, "requer": ["a3", "b3"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "status_inicial", "status": [{"status": "energizado", "duracao": 2}], "nome": "Bis"}}},
+    "x2": {"nome": "Obra-prima", "pos": [3, 4], "custo": 5, "maximo": 1, "requer": ["b3", "c3"], "efeito": {"tipo": "bonus", "modificadores": {"potencia_suporte": 0.25}}}
+  },
+
+  "bobo": {
+    "raiz": {"nome": "Primeiro Número", "pos": [2, 0], "custo": 1, "maximo": 1, "efeito": {"tipo": "atributos", "atributos": {"carisma": 1, "sorte": 1}}},
+    "a1": {"nome": "Sorte de Tolo", "pos": [0, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "atributos", "atributos": {"sorte": 1}}},
+    "a2": {"nome": "Pernas de Pau", "pos": [0, 2], "custo": 2, "maximo": 3, "requer": ["a1"], "efeito": {"tipo": "bonus", "modificadores": {"chance_esquiva": 0.02}}},
+    "a3": {"nome": "Mão Leve", "pos": [0, 3], "custo": 3, "maximo": 2, "requer": ["a2"], "efeito": {"tipo": "bonus", "modificadores": {"chance_critico": 0.04}}},
+    "b1": {"nome": "Repertório", "pos": [2, 1], "custo": 1, "maximo": 4, "requer": ["raiz"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "piada_cortante"}},
+    "b2": {"nome": "Bolas Pesadas", "pos": [2, 2], "custo": 2, "maximo": 2, "requer": ["b1"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "malabares"}},
+    "b3": {"nome": "Gargalhada", "pos": [2, 3], "custo": 3, "maximo": 2, "requer": ["b2"], "efeito": {"tipo": "nivel_habilidade", "habilidade": "risada_contagiante"}},
+    "c1": {"nome": "Guizos", "pos": [4, 1], "custo": 1, "maximo": 3, "requer": ["raiz"], "efeito": {"tipo": "atributos", "atributos": {"carisma": 1}}},
+    "c2": {"nome": "Improviso", "pos": [4, 2], "custo": 2, "maximo": 3, "requer": ["c1"], "efeito": {"tipo": "bonus", "modificadores": {"ganho_energia": 0.05}}},
+    "c3": {"nome": "Entrada Triunfal", "pos": [4, 3], "custo": 4, "maximo": 1, "requer": ["c2"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "status_inicial", "status": [{"status": "evasivo", "duracao": 2}], "nome": "Entrada Triunfal"}}},
+    "x1": {"nome": "Sorte Grande", "pos": [1, 4], "custo": 5, "maximo": 1, "requer": ["a3", "b3"], "efeito": {"tipo": "bonus", "modificadores": {"chance_critico": 0.06, "dano_critico": 0.2}}},
+    "x2": {"nome": "O Show Continua", "pos": [3, 4], "custo": 5, "maximo": 1, "requer": ["b3", "c3"], "efeito": {"tipo": "passiva", "passiva": {"tipo": "sobreviver", "vida": 1, "nome": "O Show Continua"}}}
+  },
+  "monge": {
+    "raiz": {
+      "nome": "Primeiro Voto",
+      "pos": [
+        2,
+        0
+      ],
+      "custo": 1,
+      "maximo": 1,
+      "efeito": {
+        "tipo": "atributos",
+        "atributos": {
+          "destreza": 1,
+          "fe": 1
+        }
+      }
+    },
+    "a1": {
+      "nome": "Pés Leves",
+      "pos": [
+        0,
+        1
+      ],
+      "custo": 1,
+      "maximo": 3,
+      "requer": [
+        "raiz"
+      ],
+      "efeito": {
+        "tipo": "atributos",
+        "atributos": {
+          "destreza": 1
+        }
+      }
+    },
+    "a2": {
+      "nome": "Desvio",
+      "pos": [
+        0,
+        2
+      ],
+      "custo": 2,
+      "maximo": 3,
+      "requer": [
+        "a1"
+      ],
+      "efeito": {
+        "tipo": "bonus",
+        "modificadores": {
+          "chance_esquiva": 0.02
+        }
+      }
+    },
+    "a3": {
+      "nome": "Ponto de Pressão",
+      "pos": [
+        0,
+        3
+      ],
+      "custo": 3,
+      "maximo": 2,
+      "requer": [
+        "a2"
+      ],
+      "efeito": {
+        "tipo": "bonus",
+        "modificadores": {
+          "chance_critico": 0.04
+        }
+      }
+    },
+    "b1": {
+      "nome": "Palma Treinada",
+      "pos": [
+        2,
+        1
+      ],
+      "custo": 1,
+      "maximo": 4,
+      "requer": [
+        "raiz"
+      ],
+      "efeito": {
+        "tipo": "nivel_habilidade",
+        "habilidade": "palma_aberta"
+      }
+    },
+    "b2": {
+      "nome": "Giro Perfeito",
+      "pos": [
+        2,
+        2
+      ],
+      "custo": 2,
+      "maximo": 2,
+      "requer": [
+        "b1"
+      ],
+      "efeito": {
+        "tipo": "nivel_habilidade",
+        "habilidade": "chute_giratorio"
+      }
+    },
+    "b3": {
+      "nome": "Respiração",
+      "pos": [
+        2,
+        3
+      ],
+      "custo": 3,
+      "maximo": 2,
+      "requer": [
+        "b2"
+      ],
+      "efeito": {
+        "tipo": "nivel_habilidade",
+        "habilidade": "meditacao"
+      }
+    },
+    "c1": {
+      "nome": "Fé Silenciosa",
+      "pos": [
+        4,
+        1
+      ],
+      "custo": 1,
+      "maximo": 3,
+      "requer": [
+        "raiz"
+      ],
+      "efeito": {
+        "tipo": "atributos",
+        "atributos": {
+          "fe": 1
+        }
+      }
+    },
+    "c2": {
+      "nome": "Laço Espiritual",
+      "pos": [
+        4,
+        2
+      ],
+      "custo": 2,
+      "maximo": 2,
+      "requer": [
+        "c1"
+      ],
+      "efeito": {
+        "tipo": "nivel_habilidade",
+        "habilidade": "espirito_guardiao"
+      }
+    },
+    "c3": {
+      "nome": "Mente Vazia",
+      "pos": [
+        4,
+        3
+      ],
+      "custo": 4,
+      "maximo": 1,
+      "requer": [
+        "c2"
+      ],
+      "efeito": {
+        "tipo": "passiva",
+        "passiva": {
+          "tipo": "energia_inicial",
+          "quantidade": 1,
+          "nome": "Mente Vazia"
+        }
+      }
+    },
+    "x1": {
+      "nome": "Corpo de Ferro",
+      "pos": [
+        1,
+        4
+      ],
+      "custo": 5,
+      "maximo": 1,
+      "requer": [
+        "a3",
+        "b3"
+      ],
+      "efeito": {
+        "tipo": "bonus",
+        "modificadores": {
+          "defesa": 1,
+          "vida_maxima": 8
+        }
+      }
+    },
+    "x2": {
+      "nome": "Iluminação",
+      "pos": [
+        3,
+        4
+      ],
+      "custo": 5,
+      "maximo": 1,
+      "requer": [
+        "b3",
+        "c3"
+      ],
+      "efeito": {
+        "tipo": "passiva",
+        "passiva": {
+          "tipo": "sobreviver",
+          "vida": 1,
+          "nome": "Iluminação"
+        }
+      }
+    }
+  },
+  "feiticeira": {
+    "raiz": {
+      "nome": "Primeiro Feitiço",
+      "pos": [
+        2,
+        0
+      ],
+      "custo": 1,
+      "maximo": 1,
+      "efeito": {
+        "tipo": "atributos",
+        "atributos": {
+          "inteligencia": 1,
+          "carisma": 1
+        }
+      }
+    },
+    "a1": {
+      "nome": "Ervas da Avó",
+      "pos": [
+        0,
+        1
+      ],
+      "custo": 1,
+      "maximo": 3,
+      "requer": [
+        "raiz"
+      ],
+      "efeito": {
+        "tipo": "atributos",
+        "atributos": {
+          "inteligencia": 1
+        }
+      }
+    },
+    "a2": {
+      "nome": "Olho Gordo",
+      "pos": [
+        0,
+        2
+      ],
+      "custo": 2,
+      "maximo": 3,
+      "requer": [
+        "a1"
+      ],
+      "efeito": {
+        "tipo": "bonus",
+        "modificadores": {
+          "potencia_suporte": 0.04
+        }
+      }
+    },
+    "a3": {
+      "nome": "Agulhas",
+      "pos": [
+        0,
+        3
+      ],
+      "custo": 3,
+      "maximo": 2,
+      "requer": [
+        "a2"
+      ],
+      "efeito": {
+        "tipo": "bonus",
+        "modificadores": {
+          "dano_causado_sombra": 0.06
+        }
+      }
+    },
+    "b1": {
+      "nome": "Faísca Treinada",
+      "pos": [
+        2,
+        1
+      ],
+      "custo": 1,
+      "maximo": 4,
+      "requer": [
+        "raiz"
+      ],
+      "efeito": {
+        "tipo": "nivel_habilidade",
+        "habilidade": "faisca_maldita"
+      }
+    },
+    "b2": {
+      "nome": "Corvo Fiel",
+      "pos": [
+        2,
+        2
+      ],
+      "custo": 2,
+      "maximo": 2,
+      "requer": [
+        "b1"
+      ],
+      "efeito": {
+        "tipo": "nivel_habilidade",
+        "habilidade": "chamar_corvo"
+      }
+    },
+    "b3": {
+      "nome": "Receita Antiga",
+      "pos": [
+        2,
+        3
+      ],
+      "custo": 3,
+      "maximo": 2,
+      "requer": [
+        "b2"
+      ],
+      "efeito": {
+        "tipo": "nivel_habilidade",
+        "habilidade": "caldeirao_borbulhante"
+      }
+    },
+    "c1": {
+      "nome": "Lábia",
+      "pos": [
+        4,
+        1
+      ],
+      "custo": 1,
+      "maximo": 3,
+      "requer": [
+        "raiz"
+      ],
+      "efeito": {
+        "tipo": "atributos",
+        "atributos": {
+          "carisma": 1
+        }
+      }
+    },
+    "c2": {
+      "nome": "Olhar Pesado",
+      "pos": [
+        4,
+        2
+      ],
+      "custo": 2,
+      "maximo": 2,
+      "requer": [
+        "c1"
+      ],
+      "efeito": {
+        "tipo": "nivel_habilidade",
+        "habilidade": "mau_olhado"
+      }
+    },
+    "c3": {
+      "nome": "Sombra Amiga",
+      "pos": [
+        4,
+        3
+      ],
+      "custo": 4,
+      "maximo": 1,
+      "requer": [
+        "c2"
+      ],
+      "efeito": {
+        "tipo": "passiva",
+        "passiva": {
+          "tipo": "status_inicial",
+          "status": [
+            {
+              "status": "evasivo",
+              "duracao": 2
+            }
+          ],
+          "nome": "Sombra Amiga"
+        }
+      }
+    },
+    "x1": {
+      "nome": "Coven",
+      "pos": [
+        1,
+        4
+      ],
+      "custo": 5,
+      "maximo": 1,
+      "requer": [
+        "a3",
+        "b3"
+      ],
+      "efeito": {
+        "tipo": "bonus",
+        "modificadores": {
+          "max_invocacoes": 1,
+          "ganho_energia": 0.05
+        }
+      }
+    },
+    "x2": {
+      "nome": "Sete Vidas",
+      "pos": [
+        3,
+        4
+      ],
+      "custo": 5,
+      "maximo": 1,
+      "requer": [
+        "b3",
+        "c3"
+      ],
+      "efeito": {
+        "tipo": "passiva",
+        "passiva": {
+          "tipo": "sobreviver",
+          "vida": 1,
+          "nome": "Sete Vidas"
+        }
+      }
+    }
+  },
+  "medico_da_peste": {
+    "raiz": {"nome": "Juramento do Ofício", "pos": [2, 0], "custo": 1, "maximo": 1,
+             "efeito": {"tipo": "atributos", "atributos": {"inteligencia": 1, "destreza": 1}}},
+    "a1": {"nome": "Ervas Secas", "pos": [0, 1], "custo": 1, "maximo": 3, "requer": ["raiz"],
+           "efeito": {"tipo": "atributos", "atributos": {"inteligencia": 1}}},
+    "a2": {"nome": "Dose Certa", "pos": [0, 2], "custo": 2, "maximo": 3, "requer": ["a1"],
+           "efeito": {"tipo": "bonus", "modificadores": {"cura_causada": 0.04}}},
+    "a3": {"nome": "Sangue Frio", "pos": [0, 3], "custo": 3, "maximo": 2, "requer": ["a2"],
+           "efeito": {"tipo": "bonus", "modificadores": {"chance_critico": 0.03}}},
+    "b1": {"nome": "Lâmina Limpa", "pos": [2, 1], "custo": 1, "maximo": 4, "requer": ["raiz"],
+           "efeito": {"tipo": "nivel_habilidade", "habilidade": "lanceta"}},
+    "b2": {"nome": "Receita da Avó", "pos": [2, 2], "custo": 2, "maximo": 2, "requer": ["b1"],
+           "efeito": {"tipo": "nivel_habilidade", "habilidade": "tonico_amargo"}},
+    "b3": {"nome": "Panos Encerados", "pos": [2, 3], "custo": 3, "maximo": 2, "requer": ["b2"],
+           "efeito": {"tipo": "nivel_habilidade", "habilidade": "unguento_de_ervas"}},
+    "c1": {"nome": "Couro Grosso", "pos": [4, 1], "custo": 1, "maximo": 3, "requer": ["raiz"],
+           "efeito": {"tipo": "atributos", "atributos": {"constituicao": 1}}},
+    "c2": {"nome": "Fumaça Densa", "pos": [4, 2], "custo": 2, "maximo": 2, "requer": ["c1"],
+           "efeito": {"tipo": "nivel_habilidade", "habilidade": "frasco_de_fumaca"}},
+    "c3": {"nome": "Máscara Bem Fechada", "pos": [4, 3], "custo": 4, "maximo": 1, "requer": ["c2"],
+           "efeito": {"tipo": "bonus", "modificadores": {"resiste_peste": 0.3, "resiste_veneno": 0.3}}},
+    "x1": {"nome": "Anatomia", "pos": [1, 4], "custo": 5, "maximo": 1, "requer": ["a3", "b3"],
+           "efeito": {"tipo": "bonus", "modificadores": {"cura_causada": 0.08, "dano_causado": 0.05}}},
+    "x2": {"nome": "Imunidade", "pos": [3, 4], "custo": 5, "maximo": 1, "requer": ["b3", "c3"],
+           "efeito": {"tipo": "passiva", "passiva": {"tipo": "status_inicial", "status": [{"status": "regeneracao",
+                                                       "valor": 2, "duracao": 3}], "nome": "Imunidade"}}}
+  },
+  "senhor_dos_ratos": {
+    "raiz": {"nome": "Voz do Esgoto", "pos": [2, 0], "custo": 1, "maximo": 1,
+             "efeito": {"tipo": "atributos", "atributos": {"inteligencia": 1, "carisma": 1}}},
+    "a1": {"nome": "Restos Podres", "pos": [0, 1], "custo": 1, "maximo": 3, "requer": ["raiz"],
+           "efeito": {"tipo": "atributos", "atributos": {"inteligencia": 1}}},
+    "a2": {"nome": "Bubões Maduros", "pos": [0, 2], "custo": 2, "maximo": 3, "requer": ["a1"],
+           "efeito": {"tipo": "bonus", "modificadores": {"potencia_suporte": 0.04}}},
+    "a3": {"nome": "Bico Sedento", "pos": [0, 3], "custo": 3, "maximo": 2, "requer": ["a2"],
+           "efeito": {"tipo": "bonus", "modificadores": {"roubo_vida": 0.03}}},
+    "b1": {"nome": "Dedo Podre", "pos": [2, 1], "custo": 1, "maximo": 4, "requer": ["raiz"],
+           "efeito": {"tipo": "nivel_habilidade", "habilidade": "toque_pestilento"}},
+    "b2": {"nome": "Assobio", "pos": [2, 2], "custo": 2, "maximo": 2, "requer": ["b1"],
+           "efeito": {"tipo": "nivel_habilidade", "habilidade": "chamar_ratos"}},
+    "b3": {"nome": "Manto de Moscas", "pos": [2, 3], "custo": 3, "maximo": 2, "requer": ["b2"],
+           "efeito": {"tipo": "nivel_habilidade", "habilidade": "nuvem_de_moscas"}},
+    "c1": {"nome": "Mendigo Duro", "pos": [4, 1], "custo": 1, "maximo": 3, "requer": ["raiz"],
+           "efeito": {"tipo": "atributos", "atributos": {"constituicao": 1}}},
+    "c2": {"nome": "Sede de Vida", "pos": [4, 2], "custo": 2, "maximo": 2, "requer": ["c1"],
+           "efeito": {"tipo": "nivel_habilidade", "habilidade": "sugar_a_vida"}},
+    "c3": {"nome": "Trapos Grossos", "pos": [4, 3], "custo": 4, "maximo": 1, "requer": ["c2"],
+           "efeito": {"tipo": "bonus", "modificadores": {"vida_maxima": 4, "defesa": 1}}},
+    "x1": {"nome": "Rei do Ninho", "pos": [1, 4], "custo": 5, "maximo": 1, "requer": ["a3", "b3"],
+           "efeito": {"tipo": "bonus", "modificadores": {"max_invocacoes": 1}}},
+    "x2": {"nome": "Morte que Volta", "pos": [3, 4], "custo": 5, "maximo": 1, "requer": ["b3", "c3"],
+           "efeito": {"tipo": "passiva", "passiva": {"tipo": "invocar_no_inicio", "invocacao": "rato_servo",
+                                                       "nome": "Morte que Volta"}}}
+  }
+}

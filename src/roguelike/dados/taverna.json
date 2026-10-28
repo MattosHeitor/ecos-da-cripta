@@ -1,0 +1,43 @@
+{
+  "_comentario": "Taverneiro. provisoes: consumíveis comprados com Brasas que vão para o baú no começo da próxima run (maximo = quantos no total, itens = chave -> preço). vitrine: quantas skins raras (skins.json com preco) ficam à venda; mudam depois de cada run. boatos: 3 são sorteados a cada run.",
+
+  "provisoes": {
+    "maximo": 3,
+    "itens": {"pocao_de_vida": 12, "antidoto": 8, "elixir_de_energia": 15, "bomba_de_fogo": 15,
+              "agua_benta": 25, "pergaminho_do_lobo": 30, "pergaminho_de_protecao": 35,
+              "ensopado_da_taverna": 20, "mapa_rasgado": 25, "incenso": 18}
+  },
+
+  "_mascarado": "Loja do Mercador Mascarado: aparece na Taverna depois de vencê-lo (liberada_por). Também vira provisão da próxima run.",
+  "mascarado": {
+    "liberada_por": "chefe:mercador_mascarado", "maximo": 2,
+    "itens": {"vitral_partido": 15, "minerio_de_brasa": 15, "cristal_glacial": 15, "pele_de_lobo_espectral": 40,
+              "lagrima_congelada": 45, "cinza_do_eclipse": 40, "brasa_engarrafada": 20, "coracao_do_eclipse": 160}
+  },
+
+  "vitrine": {"quantidade": 3},
+
+  "boatos": [
+    "Dizem que os ossos da Catedral racham com luz. Leve um sacerdote, ou água benta.",
+    "O Golem da Forja só tem medo de uma coisa: raio. Dizem que a pedra dele não aguenta o trovão.",
+    "Na Floresta, a Mãe Aranha queima fácil. As crias dela também.",
+    "Um anão me contou que o ferro negro das Minas vira machado rúnico nas mãos certas. Só nas mãos de um anão.",
+    "Os dragões riem do fogo. Mas o gelo, esse eles odeiam.",
+    "Os vampiros fogem da luz e não gostam de chamas. Mas sombra? Sombra eles bebem.",
+    "Insetos queimam. É só o que eu sei sobre insetos, e já é muito.",
+    "Um mercador jura que viu um gnomo carregando três mochilas. Nenhum inimigo olhou para ele.",
+    "Tem gente que morre e volta. Uma vez. Na segunda, a cova fica fechada.",
+    "Os goblins se espalham com fogo. Bombas resolvem quase tudo com goblin.",
+    "O Circo Abandonado aparece no caminho da Catedral. Quem entra sai mais rico... ou não sai.",
+    "Os bruxos da Catedral detestam a luz. Os inquisidores, ao contrário, a usam como arma.",
+    "Dizem que há golpes que nenhum mestre ensina. Só se aprendem depois de feitos que ninguém mais fez.",
+    "O Estudioso do bestiário paga em conhecimento: cada fera derrotada vira uma página no livro dele.",
+    "O treinador das especializações aparece nas regiões. Na Catedral, ensina todas.",
+    "Os golens resistem a lâminas e a veneno. Bata com trovão.",
+    "Heróis corrompidos já foram como você. Eles ainda temem a luz.",
+    "Tem um mercador de máscara que aparece nas estradas do meio do caminho. Quem o vence volta com a carroça dele.",
+    "Contam que, atrás dos dois altares do fim, existe uma porta. Só abre para quem já derrubou os dois senhores do fim.",
+    "Um Draconiano transformado contra o Dragão do Eclipse? Isso é briga de família. E família bate mais forte.",
+    "A gárgula racha com raio. O lobo da Cidadela mal sente espada: leve magia."
+  ]
+}

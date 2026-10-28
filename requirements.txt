@@ -1,0 +1,8 @@
+pygame>=2.5
+pytest>=8
+# só para as ferramentas (gerar sprites, cenários, ícone e as luzes do título) e os testes delas:
+numpy
+pillow
+scipy
+# só para construir o instalador (ferramentas/instalador/construir.py; também precisa do Inno Setup 6):
+pyinstaller
